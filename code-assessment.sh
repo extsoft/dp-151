@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 (
     black --check .
+    pylint oct suite.py
 ) || (
     cat <<RESULT
 

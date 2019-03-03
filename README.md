@@ -17,7 +17,7 @@ The following directories tree outlines the most important information about pro
 │       ├── api               <= API-related tests
 │       ├── deployment        <= deployment-related tests
 │       └── web               <= WEB-related tests
-├── oct.py                    <= a job file to run all tests
+├── suite.py                  <= a job file to run all tests
 └── requirements.txt          <= Python packages for automated tests execution
 ``` 
 
@@ -34,7 +34,7 @@ pip install -r requirements.txt
 If you need to run whole tests suite, please run 
 
 ```bash
-python oct.py
+python suite.py
 ```  
 
 If you need to run a particular test, please run
@@ -62,6 +62,7 @@ Please run `black .` to reformat the code according to the projects convention.
 We use some tools to guarantee the quality of the code.
 
 1. [Black](https://black.readthedocs.io/en/stable/) will check the quality of the code formatting.
+2. [Pylint](https://pylint.org) will analyze the code and assess it accordingly.
 
 In order to run code assessment, you need to run `./code-assessment.sh` command and make sure
 that there is no message like **_Code assessment is failed! Please fix errors!!!_**. If you face
