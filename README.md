@@ -17,7 +17,7 @@ The following directories tree outlines the most important information about pro
 │       ├── api               <= API-related tests
 │       ├── deployment        <= deployment-related tests
 │       └── web               <= WEB-related tests
-├── oct.py                    <= a job file to run all tests
+├── suite.py                  <= a job file to run all tests
 └── requirements.txt          <= Python packages for automated tests execution
 ``` 
 
@@ -34,7 +34,7 @@ pip install -r requirements.txt
 If you need to run whole tests suite, please run 
 
 ```bash
-python oct.py
+python suite.py -testbed_file testbed.yaml
 ```  
 
 If you need to run a particular test, please run
@@ -44,7 +44,17 @@ python oct/tests/web/sample.py
 ```
 where `oct/tests/web/sample.py` has to be replaced with desired test module.
 
+**_Please note!_** If you run WEB tests, please make sure you run the `chromedriver` binary first.
+
 ## Development of automated tests
+All contributors have to follow 
+[Google Python's style guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md)
+until it conflicts with the configured tools for code quality evaluation.
+
+Also, docstrings are optional for the project.
+
+[Type Hints](https://www.python.org/dev/peps/pep-0484/) are mandatory.
+
 ### Installation
 Please install required Python's dependencies with 
 ```bash
@@ -61,7 +71,12 @@ Please run `black .` to reformat the code according to the projects convention.
 ### Code assessment
 We use some tools to guarantee the quality of the code.
 
-1. [Black](https://black.readthedocs.io/en/stable/) will check the quality of the code formatting.
+1. [Black](https://black.readthedocs.io/en/stable/) checks the quality of the code formatting.
+2. [Pylint](https://pylint.org) analyzes the code and assesses it accordingly.
+3. [flake8](http://flake8.pycqa.org/en/latest/) applies some style checks on the code.
+4. [pydocstyle](http://www.pydocstyle.org/en/stable/) analyses the quality of docstrings
+(executed via `flake8`).
+5. [Mypy](https://mypy.readthedocs.io/en/latest/) checks static types. 
 
 In order to run code assessment, you need to run `./code-assessment.sh` command and make sure
 that there is no message like **_Code assessment is failed! Please fix errors!!!_**. If you face

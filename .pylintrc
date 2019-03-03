@@ -1,0 +1,57 @@
+[MESSAGES CONTROL]
+# Disable the message, report, category or checker with the given id(s). You
+# can either give multiple identifiers separated by comma (,) or put this
+# option multiple times (only on the command line, not in the configuration
+# file where it should appear only once).You can also use "--disable=all" to
+# disable everything first and then reenable specific checks. For example, if
+# you want to run only the similarities checker, you can use "--disable=all
+# --enable=similarities". If you want to run only the classes checker, but have
+# no Warning level messages displayed, use"--disable=all --enable=classes
+# --disable=W"
+disable=
+    bad-continuation,
+    missing-docstring,
+
+[BASIC]
+# Regular expression matching correct constant names
+const-rgx=(([A-Z_][A-Z0-9_]*)|(__.*__)|(_[a-z_]*))$
+
+[REPORTS]
+# Tells whether to display a full report or only the messages
+reports=yes
+
+[FORMAT]
+# Maximum number of characters on a single line.
+max-line-length=100
+
+[DESIGN]
+# Maximum number of arguments for function / method
+max-args=5
+
+# Argument names that match this expression will be ignored. Default to name
+# with leading underscore
+ignored-argument-names=_.*
+
+# Maximum number of locals for function / method body
+max-locals=10
+
+# Maximum number of return / yield for function / method body
+max-returns=2
+
+# Maximum number of branch for function / method body
+max-branches=2
+
+# Maximum number of statements in function / method body
+max-statements=50
+
+# Maximum number of parents for a class (see R0901).
+max-parents=5
+
+# Maximum number of attributes for a class (see R0902).
+max-attributes=5
+
+# Minimum number of public methods for a class (see R0903).
+min-public-methods=1
+
+# Maximum number of public methods for a class (see R0904).
+max-public-methods=7
