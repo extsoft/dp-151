@@ -3,6 +3,7 @@
 The purpose of this repository is to provide automated test suite for 
 [OpenCart](https://github.com/bitnami/bitnami-docker-opencart) e-commerce platform.
 
+[![Build Status](https://travis-ci.org/extsoft/dp-151.svg?branch=master)](https://travis-ci.org/extsoft/dp-151)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
 ## Project structure
@@ -56,3 +57,12 @@ This allows supporting of common code style across all contributors and will red
 lines for either merge conflicts or review.
 
 Please run `black .` to reformat the code according to the projects convention.
+
+### Code assessment
+We use some tools to guarantee the quality of the code.
+
+1. [Black](https://black.readthedocs.io/en/stable/) will check the quality of the code formatting.
+
+In order to run code assessment, you need to run `./code-assessment.sh` command and make sure
+that there is no message like **_Code assessment is failed! Please fix errors!!!_**. If you face
+the massage, please fix all violations.
