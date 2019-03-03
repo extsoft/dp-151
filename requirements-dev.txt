@@ -1,0 +1,3 @@
+# This requirements file brings packages required for static code analysis.
+# And these packages have not to be installed to a production environment.
+black==18.9b0

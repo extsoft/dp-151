@@ -3,6 +3,8 @@
 The purpose of this repository is to provide automated test suite for 
 [OpenCart](https://github.com/bitnami/bitnami-docker-opencart) e-commerce platform.
 
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
+
 ## Project structure
 The following directories tree outlines the most important information about project structure:
 ```text
@@ -40,3 +42,17 @@ export PYTHONPATH=$(pwd):${PYTHONPATH}
 python oct/tests/web/sample.py
 ```
 where `oct/tests/web/sample.py` has to be replaced with desired test module.
+
+## Development of automated tests
+### Installation
+Please install required Python's dependencies with 
+```bash
+pip install -r requirements-dev.txt
+```
+
+### Code formatting
+We use [Black](https://black.readthedocs.io/en/stable/) for the auto-formatting of the code.
+This allows supporting of common code style across all contributors and will reduce amount of
+lines for either merge conflicts or review.
+
+Please run `black .` to reformat the code according to the projects convention.

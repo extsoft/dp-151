@@ -1,0 +1,12 @@
+[tool.black]
+line-length = 100
+py36 = true
+exclude = '''
+/(
+    \.mypy_cache
+  | \.pytest_cache
+  | archive
+  | docker
+  | testbeds
+)/
+'''

@@ -7,28 +7,22 @@ from oct.tests.api import sample as api_sample_test
 from oct.tests.deployment import sample as deployment_sample_test
 
 
-_api_tests = (
-    api_sample_test,
-)
+_api_tests = (api_sample_test,)
 
-_web_tests = (
-    web_sample_test,
-)
+_web_tests = (web_sample_test,)
 
-_deployment_tests = (
-    deployment_sample_test,
-)
-
-
+_deployment_tests = (deployment_sample_test,)
 
 
 def main():
     for test_module in _api_tests + _web_tests + _deployment_tests:
         full_test_path = test_module.__file__
         easypy.run(
-            taskid=' -> '.join((
-                os.path.dirname(full_test_path).split(os.sep)[-1],
-                os.path.basename(full_test_path))
+            taskid=" -> ".join(
+                (
+                    os.path.dirname(full_test_path).split(os.sep)[-1],
+                    os.path.basename(full_test_path),
+                )
             ),
             testscript=full_test_path,
         )
