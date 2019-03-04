@@ -45,6 +45,12 @@ python oct/tests/web/sample.py
 where `oct/tests/web/sample.py` has to be replaced with desired test module.
 
 ## Development of automated tests
+All contributors have to follow 
+[Google Python's style guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md)
+until it conflicts with the configured tools for code quality evaluation.
+
+Also, docstrings are optional for the project.
+
 ### Installation
 Please install required Python's dependencies with 
 ```bash
@@ -61,8 +67,11 @@ Please run `black .` to reformat the code according to the projects convention.
 ### Code assessment
 We use some tools to guarantee the quality of the code.
 
-1. [Black](https://black.readthedocs.io/en/stable/) will check the quality of the code formatting.
-2. [Pylint](https://pylint.org) will analyze the code and assess it accordingly.
+1. [Black](https://black.readthedocs.io/en/stable/) checks the quality of the code formatting.
+2. [Pylint](https://pylint.org) analyzes the code and assesses it accordingly.
+3. [flake8](http://flake8.pycqa.org/en/latest/) applies some style checks on the code.
+4. [pydocstyle](http://www.pydocstyle.org/en/stable/) analyses the quality of docstrings
+(executed via `flake8`).
 
 In order to run code assessment, you need to run `./code-assessment.sh` command and make sure
 that there is no message like **_Code assessment is failed! Please fix errors!!!_**. If you face
