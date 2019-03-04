@@ -1,5 +1,5 @@
 from pyats.aetest import main
 
 
-def run_testcase():
+def run_testcase() -> None:
     main()

@@ -6,7 +6,7 @@ from oct.tests import run_testcase
 
 class SampleWebTest(Testcase):
     @test
-    def to_be_deleted(self):
+    def to_be_deleted(self) -> None:
         print("Please delete me (SampleWebTest) once a real test is added.")
 
 

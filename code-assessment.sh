@@ -3,6 +3,7 @@
     black --check .
     pylint oct suite.py
     flake8 oct suite.py
+    mypy oct suite.py
 ) || (
     cat <<RESULT
 

@@ -51,6 +51,8 @@ until it conflicts with the configured tools for code quality evaluation.
 
 Also, docstrings are optional for the project.
 
+[Type Hints](https://www.python.org/dev/peps/pep-0484/) are mandatory.
+
 ### Installation
 Please install required Python's dependencies with 
 ```bash
@@ -72,6 +74,7 @@ We use some tools to guarantee the quality of the code.
 3. [flake8](http://flake8.pycqa.org/en/latest/) applies some style checks on the code.
 4. [pydocstyle](http://www.pydocstyle.org/en/stable/) analyses the quality of docstrings
 (executed via `flake8`).
+5. [Mypy](https://mypy.readthedocs.io/en/latest/) checks static types. 
 
 In order to run code assessment, you need to run `./code-assessment.sh` command and make sure
 that there is no message like **_Code assessment is failed! Please fix errors!!!_**. If you face
