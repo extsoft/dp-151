@@ -6,12 +6,13 @@ from pyats.easypy.main import EasypyRuntime
 
 from oct.tests import mandatory_aetest_arguments
 from oct.tests.web import sample as web_sample_test
+from oct.tests.web import registration
 from oct.tests.api import sample as api_sample_test
 from oct.tests.deployment import sample as deployment_sample_test
 
 _api_tests = (api_sample_test,)
 
-_web_tests = (web_sample_test,)
+_web_tests = (web_sample_test, registration)
 
 _deployment_tests = (deployment_sample_test,)
 
