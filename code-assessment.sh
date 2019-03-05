@@ -11,4 +11,5 @@
 = Code assessment is failed! Please fix errors!!! =
 ===================================================
 RESULT
+    exit 11
 )
