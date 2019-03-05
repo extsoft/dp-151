@@ -1,0 +1,4 @@
+testbed:
+    name: example_selenium_testbed
+    custom:
+      selenium-grid: http://localhost:9515

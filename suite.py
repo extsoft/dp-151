@@ -2,6 +2,9 @@ import sys
 import os
 from pyats import easypy
 
+from pyats.easypy.main import EasypyRuntime
+
+from oct.tests import mandatory_aetest_arguments
 from oct.tests.web import sample as web_sample_test
 from oct.tests.api import sample as api_sample_test
 from oct.tests.deployment import sample as deployment_sample_test
@@ -13,7 +16,7 @@ _web_tests = (web_sample_test,)
 _deployment_tests = (deployment_sample_test,)
 
 
-def main() -> None:
+def main(runtime: EasypyRuntime) -> None:
     for test_module in _api_tests + _web_tests + _deployment_tests:
         full_test_path = test_module.__file__
         easypy.run(  # pylint: disable=no-member
@@ -24,6 +27,7 @@ def main() -> None:
                 )
             ),
             testscript=full_test_path,
+            **mandatory_aetest_arguments(runtime.testbed),
         )
 
 

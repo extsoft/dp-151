@@ -1,1 +1,2 @@
 pyats==5.1.0
+selenium==3.141.0
