@@ -34,7 +34,7 @@ pip install -r requirements.txt
 If you need to run whole tests suite, please run 
 
 ```bash
-python suite.py
+python suite.py -testbed_file testbed.yaml
 ```  
 
 If you need to run a particular test, please run
@@ -43,6 +43,8 @@ export PYTHONPATH=$(pwd):${PYTHONPATH}
 python oct/tests/web/sample.py
 ```
 where `oct/tests/web/sample.py` has to be replaced with desired test module.
+
+**_Please note!_** If you run WEB tests, please make sure you run the `chromedriver` binary first.
 
 ## Development of automated tests
 All contributors have to follow 
