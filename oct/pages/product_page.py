@@ -37,3 +37,8 @@ class ProductPage(Page):
             return True
         except NoSuchElementException:
             return False
+
+    def open_review_link(self) -> None:
+        self._browser.find_element_by_xpath(
+            '// * [ @ id = "content"] / div / div[1] / ul[2] / li[2] / a'
+        ).click()
