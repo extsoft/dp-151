@@ -25,11 +25,6 @@ class ProductPage(Page):
         )
         brand_name.click()
 
-    def open_review_link(self) -> None:
-        self._browser.find_element_by_xpath(
-            '// * [ @ id = "content"] / div / div[1] / ul[2] / li[2] / a'
-        ).click()
-
     def open_share_link(self) -> None:
         self._browser.find_element_by_xpath(
             '//*[@id="content"]/div/div[2]/div[3]/div/a[4]/a[1]'
@@ -47,3 +42,8 @@ class ProductPage(Page):
             return True
         except NoSuchElementException:
             return False
+
+    def open_review_link(self) -> None:
+        self._browser.find_element_by_xpath(
+            '// * [ @ id = "content"] / div / div[1] / ul[2] / li[2] / a'
+        ).click()

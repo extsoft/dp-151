@@ -13,7 +13,7 @@ class SharePopup(Testcase):
     @test
     def test(self, grid: str) -> None:
         chrome: Remote = Chrome(grid)
-        product_page = ProductPage(chrome, "33", "Samsung SyncMaster 941BW")
+        product_page = ProductPage(chrome, "34", "iPod Shuffle")
         product_page.open()
         product_page.open_share_link()
         share_page = ShareWindow(chrome)

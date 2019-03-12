@@ -5,7 +5,6 @@ from selenium.common.exceptions import NoSuchElementException
 class ShareWindow:
     def __init__(self, browser: Remote):
         self._browser = browser
-        self._browser.implicitly_wait(5)
 
     def is_open_popup_share(self) -> bool:
         try:
