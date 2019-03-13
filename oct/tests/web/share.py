@@ -15,7 +15,7 @@ class SharePopup(Testcase):
         chrome: Remote = Chrome(grid)
         product_page = ProductPage(chrome, "34", "iPod Shuffle")
         product_page.open()
-        product_page.open_share_link()
+        product_page.information_block().open_share_link()
         share_page = ShareWindow(chrome)
         assert share_page.is_open_popup_share()
 
