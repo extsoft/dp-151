@@ -23,3 +23,13 @@ class ProductPage(Page):
             '//*[@id="content"]/div[1]/div[2]/ul[1]/li[1]/a'
         )
         brand_name.click()
+
+    def open_review_link(self) -> None:
+        self._browser.find_element_by_xpath(
+            '// * [ @ id = "content"] / div / div[1] / ul[2] / li[2] / a'
+        ).click()
+
+    def open_share_link(self) -> None:
+        self._browser.find_element_by_xpath(
+            '//*[@id="content"]/div/div[2]/div[3]/div/a[4]/a[1]'
+        ).click()
