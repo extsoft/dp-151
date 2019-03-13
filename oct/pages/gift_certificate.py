@@ -6,7 +6,6 @@ from oct.pages.base import Page
 class GiftCertificate(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
-        self._browser.implicitly_wait(5)
 
     def open(self) -> None:
         self._browser.get("https://localhost/index.php?route=account/voucher")
@@ -43,7 +42,6 @@ class GiftCertificate(Page):
 class PurchaseSuccessful(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
-        self._browser.implicitly_wait(5)
 
     def open(self) -> None:
         raise RuntimeError("This page can't be received via URL")

@@ -5,7 +5,6 @@ from oct.pages.base import Page
 class PersonalDetails:
     def __init__(self, browser: Remote):
         self._browser = browser
-        self._browser.implicitly_wait(5)
 
     def type_first_name(self, first_name: str) -> None:
         first_name_field = self._browser.find_element_by_id("input-firstname")
@@ -31,7 +30,6 @@ class PersonalDetails:
 class Password:
     def __init__(self, browser: Remote):
         self._browser = browser
-        self._browser.implicitly_wait(5)
 
     def type_password(self, password: str) -> None:
         password_field = self._browser.find_element_by_id("input-password")
@@ -47,7 +45,6 @@ class Password:
 class RegisterAccountPage(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
-        self._browser.implicitly_wait(5)
         self._details = PersonalDetails(browser)
         self._password = Password(browser)
 
@@ -77,7 +74,6 @@ class RegisterAccountPage(Page):
 class RegistrationSuccessPage(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
-        self._browser.implicitly_wait(5)
 
     def open(self) -> None:
         raise RuntimeError("This page can't be open through an URL")

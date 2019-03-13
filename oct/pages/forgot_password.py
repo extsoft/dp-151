@@ -11,7 +11,6 @@ class ForgotPasswordPage:
 
     def open(self) -> None:
         self._browser.get("https://localhost/index.php?route=account/forgotten")
-        self._browser.implicitly_wait(10)
 
     def loaded(self) -> bool:
         return "Forgot Your Password?" in self._browser.title
@@ -26,11 +25,9 @@ class ForgotPasswordPage:
 class ConfirmationMessage(Page):
     def __init__(self, browser: Remote):
         self._browser = browser
-        self._browser.implicitly_wait(10)
 
     def open(self) -> None:
         self._browser.get("https://localhost/index.php?route=account/account")
-        self._browser.implicitly_wait(10)
 
     def loaded(self) -> bool:
         try:

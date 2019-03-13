@@ -8,7 +8,6 @@ class ProductPage(Page):
         self._browser = browser
         self._product_id = product_id
         self._product_name = product_name
-        self._browser.implicitly_wait(5)
 
     def open(self) -> None:
         self._browser.get(

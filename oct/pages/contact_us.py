@@ -6,7 +6,6 @@ from oct.pages.registration import PersonalDetails
 class ContactDetails:
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
-        self._browser.implicitly_wait(5)
 
     def type_your_name(self, your_name: str) -> None:
         your_name_field = self._browser.find_element_by_id("input-name")
@@ -22,7 +21,6 @@ class ContactDetails:
 class ContactUsPage(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
-        self._browser.implicitly_wait(5)
         self._details = ContactDetails(browser)
         self._email = PersonalDetails(browser)
 
@@ -44,7 +42,6 @@ class ContactUsPage(Page):
 class ContactUsSuccessPage(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
-        self._browser.implicitly_wait(5)
 
     def open(self) -> None:
         raise RuntimeError("This page couldn't be open through an URL")
