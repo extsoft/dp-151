@@ -15,7 +15,7 @@ class OpenBrand(Testcase):
         chrome: Remote = Chrome(grid)
         product_page = ProductPage(chrome, "41", "IMac")
         product_page.open()
-        product_page.open_brand_page()
+        product_page.information_block().open_brand_page()
         assert BrandPage(chrome, "8", "Apple").loaded()
 
 
