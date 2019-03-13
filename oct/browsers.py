@@ -23,9 +23,11 @@ class Chrome:
         @functools.lru_cache()
         def con() -> Remote:
             _log.info("Starting a browser session. Connect to: %s", grid)
-            return Remote(
+            remote = Remote(
                 command_executor=grid, desired_capabilities=ChromeOptions().to_capabilities()
             )
+            remote.implicitly_wait(5)
+            return remote
 
         self._client = con
 

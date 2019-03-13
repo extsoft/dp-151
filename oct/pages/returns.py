@@ -7,7 +7,6 @@ from oct.pages.registration import PersonalDetails
 class OrderDetails:
     def __init__(self, browser: Remote):
         self._browser = browser
-        self._browser.implicitly_wait(5)
 
     def type_order_id(self, order_id: str) -> None:
         order_id_field = self._browser.find_element_by_id("input-order-id")
@@ -23,7 +22,6 @@ class OrderDetails:
 class ProductDetails:
     def __init__(self, browser: Remote):
         self._browser = browser
-        self._browser.implicitly_wait(5)
 
     def type_product_name(self, product_name: str) -> None:
         product_name_field = self._browser.find_element_by_id("input-product")
@@ -50,7 +48,6 @@ class ProductDetails:
 class ReturnsPage(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
-        self._browser.implicitly_wait(5)
         self.personal_details = PersonalDetails(browser)
         self._order_details = OrderDetails(browser)
         self._product_details = ProductDetails(browser)
@@ -96,7 +93,6 @@ class ReturnsPage(Page):
 class ReturnsSuccessPage(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
-        self._browser.implicitly_wait(5)
 
     def open(self) -> None:
         raise RuntimeError("This page is not available for open through an URL")

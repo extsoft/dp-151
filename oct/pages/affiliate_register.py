@@ -9,7 +9,6 @@ from oct.pages.registration import RegisterAccountPage
 class AffiliateInformation:
     def __init__(self, browser: Remote):
         self._browser = browser
-        self._browser.implicitly_wait(5)
 
     def type_company(self, company: str) -> None:
         company_field = self._browser.find_element_by_id("input-company")
@@ -35,7 +34,6 @@ class AffiliateInformation:
 class RegisterAffiliatePage(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
-        self._browser.implicitly_wait(5)
         self._personal_details = PersonalDetails(browser)
         self._information = AffiliateInformation(browser)
         self._password = Password(browser)
@@ -77,7 +75,6 @@ class RegisterAffiliatePage(Page):
 class RegAffiliateSuccessPage(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
-        self._browser.implicitly_wait(5)
         self._open = RegistrationSuccessPage(browser)
 
     def open(self) -> None:
