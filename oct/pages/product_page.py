@@ -1,4 +1,5 @@
 from selenium.webdriver import Remote
+from selenium.common.exceptions import NoSuchElementException
 from oct.pages.base import Page
 
 
@@ -33,3 +34,16 @@ class ProductPage(Page):
         self._browser.find_element_by_xpath(
             '//*[@id="content"]/div/div[2]/div[3]/div/a[4]/a[1]'
         ).click()
+
+    def open_product_image(self) -> None:
+        product_img = self._browser.find_element_by_xpath(
+            '//*[@id="content"]/div[1]/div[1]/ul[1]/li[2]/a/img'
+        )
+        product_img.click()
+
+    def is_open_image(self) -> bool:
+        try:
+            self._browser.find_element_by_class_name("mfp-img")
+            return True
+        except NoSuchElementException:
+            return False
