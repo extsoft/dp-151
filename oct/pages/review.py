@@ -1,5 +1,15 @@
+from enum import Enum
+
 from selenium.webdriver import Remote
 from selenium.common.exceptions import NoSuchElementException
+
+
+class Rating(Enum):
+    ONE = 1
+    TWO = 2
+    THREE = 3
+    FOUR = 4
+    FIVE = 5
 
 
 class Review:
@@ -17,12 +27,12 @@ class Review:
         review_field.click()
         review_field.send_keys(review)
 
-    def choose_rating_from_1_to_5(self, rating: int) -> None:
+    def choose_rating(self, rating: Rating) -> None:
         rating_s = self._browser.find_element_by_xpath(
-            f'//*[@id="form-review"]/div[4]/div/input' f"[{rating}]"
+            f'//*[@id="form-review"]/div[4]/div/input' f"[{rating.value}]"
         )
         rating_s.click()
-        rating_s.send_keys(rating)
+        rating_s.send_keys(rating.value)
 
     def press_continue(self) -> None:
         self._browser.find_element_by_class_name("btn-primary").click()
