@@ -5,7 +5,7 @@ from pyats.aetest import Testcase, test
 from selenium.webdriver import Remote
 from oct.browsers import Chrome
 from oct.tests import run_testcase
-from oct.pages.review import Review
+from oct.pages.review import Review, Rating
 from oct.pages.product_page import ProductPage
 
 
@@ -19,7 +19,7 @@ class UsersReview(Testcase):
         review_tab = Review(chrome)
         review_tab.type_name("AutoTestBot")
         review_tab.type_review("This review has been wrote by auto test bot!")
-        review_tab.choose_rating_from_1_to_5(3)
+        review_tab.choose_rating(Rating.THREE)
         review_tab.press_continue()
         assert review_tab.successfully_added()
 
