@@ -6,7 +6,6 @@ from oct.pages.registration import PersonalDetails, Password
 class LoginPage(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
-        self._browser.implicitly_wait(5)
         self._email = PersonalDetails(browser)
         self._password = Password(browser)
 

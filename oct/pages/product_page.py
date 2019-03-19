@@ -1,4 +1,5 @@
 from selenium.webdriver import Remote
+from selenium.common.exceptions import NoSuchElementException
 from oct.pages.base import Page
 
 
@@ -7,7 +8,6 @@ class ProductPage(Page):
         self._browser = browser
         self._product_id = product_id
         self._product_name = product_name
-        self._browser.implicitly_wait(5)
 
     def open(self) -> None:
         self._browser.get(
@@ -23,3 +23,26 @@ class ProductPage(Page):
             '//*[@id="content"]/div[1]/div[2]/ul[1]/li[1]/a'
         )
         brand_name.click()
+
+    def open_share_link(self) -> None:
+        self._browser.find_element_by_xpath(
+            '//*[@id="content"]/div/div[2]/div[3]/div/a[4]/a[1]'
+        ).click()
+
+    def open_product_image(self) -> None:
+        product_img = self._browser.find_element_by_xpath(
+            '//*[@id="content"]/div[1]/div[1]/ul[1]/li[2]/a/img'
+        )
+        product_img.click()
+
+    def is_open_image(self) -> bool:
+        try:
+            self._browser.find_element_by_class_name("mfp-img")
+            return True
+        except NoSuchElementException:
+            return False
+
+    def open_review_link(self) -> None:
+        self._browser.find_element_by_xpath(
+            '// * [ @ id = "content"] / div / div[1] / ul[2] / li[2] / a'
+        ).click()
