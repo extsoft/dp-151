@@ -35,3 +35,10 @@ class ConfirmationMessage(Page):
             return True
         except NoSuchElementException:
             return False
+
+    def not_loaded(self) -> bool:
+        try:
+            self._browser.find_element_by_css_selector("div.alert.alert-danger.alert-dismissible")
+            return True
+        except NoSuchElementException:
+            return False
