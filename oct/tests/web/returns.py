@@ -3,7 +3,7 @@ from pyats.aetest import Testcase, test
 from selenium.webdriver import Remote
 from oct.browsers import Chrome
 from oct.tests import run_testcase
-from oct.pages.returns import ReturnsPage, ReturnsSuccessPage
+from oct.pages.returns import ReturnsPage, ReturnsSuccessPage, Reason, Condition
 
 
 class Returns(Testcase):
@@ -15,7 +15,7 @@ class Returns(Testcase):
         returns.fill_personal_details("Alex", "Alekseev", "didilov.al@gmail.com", "123456")
         returns.fill_order_details("214", "12-03-2019")
         returns.fill_product_details("iMac", "892123", "1", "New item has some scratches")
-        returns.choose_reason_and_condition("1", "1")
+        returns.choose_reason_and_condition(Reason.FAULTY, Condition.NEW)
         returns.press_submit()
         assert ReturnsSuccessPage(chrome).loaded()
 

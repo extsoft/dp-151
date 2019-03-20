@@ -1,7 +1,21 @@
+from enum import Enum
 from selenium.webdriver import Remote
 from selenium.common.exceptions import NoSuchElementException
 from oct.pages.base import Page
 from oct.pages.registration import PersonalDetails
+
+
+class Reason(Enum):
+    BROKEN = 1
+    FAULTY = 2
+    ORDER_ERROR = 3
+    OTHER = 4
+    WRONG_ITEM = 5
+
+
+class Condition(Enum):
+    NEW = 0
+    USED = 1
 
 
 class OrderDetails:
@@ -78,12 +92,12 @@ class ReturnsPage(Page):
         self._product_details.type_quantity(quantity)
         self._product_details.type_faulty(faulty)
 
-    def choose_reason_and_condition(self, reason: str, product_condition: str) -> None:
+    def choose_reason_and_condition(self, reason: Reason, product_condition: Condition) -> None:
         self._browser.find_element_by_xpath(
-            f"//*[contains(@name, 'return_reason_id') and contains(@value, {reason})]"
+            f"//*[contains(@name, 'return_reason_id') and contains(@value, {reason.value})]"
         ).click()
         self._browser.find_element_by_xpath(
-            f"//*[contains(@name, 'opened') and contains(@value, {product_condition})]"
+            f"//*[contains(@name, 'opened') and contains(@value, {product_condition.value})]"
         ).click()
 
     def press_submit(self) -> None:
