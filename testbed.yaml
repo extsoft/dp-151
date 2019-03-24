@@ -2,3 +2,21 @@ testbed:
     name: example_selenium_testbed
     custom:
       selenium-grid: http://localhost:9515
+    servers:
+      server_alias:
+        address: 192.168.195.143
+        username: adminaccount
+        password: Install_new!
+devices:
+    vm:
+        os: 'linux'
+        connections:
+            defaults:
+                via: main
+                alias: default
+            main:
+                username: adminaccount
+                protocol: ssh
+                ip: 192.168.195.143
+                password: Install_new!
+        type: 'linux'
