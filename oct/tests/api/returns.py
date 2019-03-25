@@ -1,0 +1,36 @@
+# pylint: disable=no-self-use # pyATS-related exclusion
+from pyats.aetest import Testcase, test
+import requests
+import urllib3
+from oct.tests import run_testcase
+
+
+class Returns(Testcase):
+    @test
+    def test_returns(self) -> None:
+        parameters = {
+            "firstname": "Alex",
+            "lastname": "Petrov",
+            "email": "newaddr@gmail.com",
+            "telephone": "+380963453377",
+            "order_id": "1234",
+            "date_ordered": "2019-03-22",
+            "product": "apple",
+            "model": "Imac",
+            "quantity": 1,
+            "return_reason_id": 4,
+            "opened": 1,
+            "comment": "New item has some scratches",
+        }
+        urllib3.disable_warnings()
+        request = requests.post(
+            "https://192.168.195.143/index.php?route=account/return/add", parameters, verify=False
+        )
+        assert (
+            "Thank you for submitting your return request."
+            " Your request has been sent to the relevant department for processing" in request.text
+        )
+
+
+if __name__ == "__main__":
+    run_testcase()
