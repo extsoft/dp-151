@@ -23,6 +23,9 @@ class InformationBlock:
             '//*[@id="content"]/div[1]/div[2]/div[1]/button[1]'
         ).click()
 
+    def add_to_cart(self) -> None:
+        self._browser.find_element_by_id("button-cart").click()
+
 
 class MessageBlock:
     def __init__(self, browser: Remote):
@@ -33,6 +36,13 @@ class MessageBlock:
             self._browser.find_element_by_css_selector(
                 "#product-product > div.alert.alert-success.alert-dismissible"
             )
+            return True
+        except NoSuchElementException:
+            return False
+
+    def has_cart_message(self) -> bool:
+        try:
+            self._browser.find_element_by_xpath('//*[@id="product-product"]/div[1]')
             return True
         except NoSuchElementException:
             return False
