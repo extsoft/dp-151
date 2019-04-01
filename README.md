@@ -81,3 +81,18 @@ We use some tools to guarantee the quality of the code.
 In order to run code assessment, you need to run `./code-assessment.sh` command and make sure
 that there is no message like **_Code assessment is failed! Please fix errors!!!_**. If you face
 the massage, please fix all violations.
+
+### Deploy and destroy application
+If you want to deploy the application to localhost, you need to run in the terminal
+```bash
+sudo docker-compose up
+```
+After that you can enter in the browser's search field 
+```text
+https://127.0.0.1 or https://localhost
+```
+and use the application.
+If you need to destroy application, run in the terminal
+```bash
+sudo docker-compose down
+```
