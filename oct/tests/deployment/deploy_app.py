@@ -3,7 +3,7 @@
 # pylint: disable=invalid-name
 # pylint: disable=too-many-branches
 import os
-from pyats.topology import Device, loader
+from pyats.topology import Device
 from pyats.aetest import Testcase, test
 from pyats.utils.fileutils import FileUtils
 from requests.exceptions import ConnectTimeout
@@ -27,10 +27,8 @@ def is_deploy_app(device: Device) -> bool:
 
 
 class DeployApp(Testcase):
-    testbed = loader.load("testbed.yaml")
-
     @test
-    def deploy_app(self, device: Device = testbed.devices["vm"]) -> None:
+    def deploy_app(self, device: Device) -> None:
         try:
             device.connect()
             device.execute("mkdir oct")

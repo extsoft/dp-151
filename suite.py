@@ -1,3 +1,4 @@
+# pylint: disable=no-value-for-parameter
 import sys
 import os
 from pyats import easypy
@@ -8,7 +9,7 @@ from oct.tests import mandatory_aetest_arguments
 from oct.tests.web import sample as web_sample_test
 from oct.tests.web import registration
 from oct.tests.api import registration as api_sample_test
-from oct.tests.deployment import sample as deployment_sample_test
+from oct.tests.deployment import deploy_app as deployment_sample_test
 
 _api_tests = (api_sample_test,)
 
@@ -28,7 +29,7 @@ def main(runtime: EasypyRuntime) -> None:
                 )
             ),
             testscript=full_test_path,
-            **mandatory_aetest_arguments(runtime.testbed),
+            **mandatory_aetest_arguments(runtime.testbed, device_name="vm"),
         )
 
 
