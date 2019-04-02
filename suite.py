@@ -1,24 +1,19 @@
 import sys
 import os
-from pyats import easypy
 
+from pyats import easypy
 from pyats.easypy.main import EasypyRuntime
 
 from oct.tests import mandatory_aetest_arguments
-from oct.tests.web import sample as web_sample_test
-from oct.tests.web import registration
-from oct.tests.api import registration as api_sample_test
-from oct.tests.deployment import sample as deployment_sample_test
+from oct.tests.web import review
+from oct.tests.api import review as api_review
 
-_api_tests = (api_sample_test,)
-
-_web_tests = (web_sample_test, registration)
-
-_deployment_tests = (deployment_sample_test,)
+_api_tests = (api_review,)
+_web_tests = (review,)
 
 
 def main(runtime: EasypyRuntime) -> None:
-    for test_module in _api_tests + _web_tests + _deployment_tests:
+    for test_module in _api_tests + _web_tests:
         full_test_path = test_module.__file__
         easypy.run(  # pylint: disable=no-member
             taskid=" -> ".join(
