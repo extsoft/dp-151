@@ -1,6 +1,8 @@
 # pylint: disable=no-value-for-parameter
 import sys
 import os
+from typing import Tuple, Any, List
+
 from pyats import easypy
 
 from pyats.easypy.main import EasypyRuntime
@@ -54,10 +56,11 @@ _web_tests = (
 _deployment_tests = (deploy_app,)
 
 
-def main(runtime: EasypyRuntime) -> None:
-    for test_module in _api_tests + _web_tests + _deployment_tests:
+def tests_runner(test_suite: Tuple, instance: Any) -> List:  # type: ignore
+    test_suite_results = list()
+    for test_module in test_suite:
         full_test_path = test_module.__file__
-        easypy.run(  # pylint: disable=no-member
+        test_result = easypy.run(  # pylint: disable=no-member
             taskid=" -> ".join(
                 (
                     os.path.dirname(full_test_path).split(os.sep)[-1],
@@ -65,8 +68,15 @@ def main(runtime: EasypyRuntime) -> None:
                 )
             ),
             testscript=full_test_path,
-            **mandatory_aetest_arguments(runtime.testbed, device_name="vm"),
+            **mandatory_aetest_arguments(instance, device_name="vm"),
         )
+        test_suite_results.append(str(test_result))
+    return test_suite_results
+
+
+def main(runtime: EasypyRuntime) -> None:
+    if "failed" not in tests_runner(_api_tests, runtime.testbed):
+        tests_runner(_web_tests, runtime.testbed)
 
 
 if __name__ == "__main__":
