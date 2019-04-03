@@ -18,12 +18,12 @@ def copy_file_to_server(device: Device) -> None:
     )
 
 
-def is_deploy_app(device: Device) -> bool:
+def is_deploy_app(device: Device, lines: int) -> bool:
     non_empty_lines_counter = 0
     for iterator in device.execute("docker-compose ps -q"):
         if iterator == "\n":
             non_empty_lines_counter += 1
-    return non_empty_lines_counter == 2
+    return non_empty_lines_counter == lines
 
 
 class DeployApp(Testcase):
@@ -35,7 +35,7 @@ class DeployApp(Testcase):
             copy_file_to_server(device)
             device.execute("cd oct")
             device.execute(f"APP_HOST={device.connections.main.ip} docker-compose up -d")
-            assert is_deploy_app(device)
+            assert is_deploy_app(device, 2)
         except ConnectTimeout:
             self.failed()
         finally:

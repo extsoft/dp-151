@@ -11,6 +11,7 @@ def mandatory_aetest_arguments(testbed: Testbed, device_name: str) -> Dict[str, 
         "testbed": testbed,
         "grid": testbed.custom["selenium-grid"],
         "device": testbed.devices[device_name],
+        "server": testbed.devices[device_name],
     }
 
 
