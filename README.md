@@ -76,7 +76,8 @@ We use some tools to guarantee the quality of the code.
 3. [flake8](http://flake8.pycqa.org/en/latest/) applies some style checks on the code.
 4. [pydocstyle](http://www.pydocstyle.org/en/stable/) analyses the quality of docstrings
 (executed via `flake8`).
-5. [Mypy](https://mypy.readthedocs.io/en/latest/) checks static types. 
+5. [Mypy](https://mypy.readthedocs.io/en/latest/) checks static types.
+6. [py.test](https://docs.pytest.org) runs unittests. 
 
 In order to run code assessment, you need to run `./code-assessment.sh` command and make sure
 that there is no message like **_Code assessment is failed! Please fix errors!!!_**. If you face
