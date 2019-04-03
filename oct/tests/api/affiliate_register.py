@@ -1,30 +1,35 @@
 # pylint: disable=no-self-use # pyATS-related exclusion
-from pyats.aetest import Testcase, test
+import urllib3
 import requests
+from pyats.aetest import test, Testcase
+from pyats.topology import Device
 from oct.tests import run_testcase
 
 
 class AffiliateReg(Testcase):
     @test
-    def test_affiliate_reg(self) -> None:
+    def test_affiliate_reg(self, device: Device) -> None:
+        urllib3.disable_warnings()
         params = {
             "firstname": "Alex",
             "lastname": "Second",
-            "email": "atest122@gmail.com",
+            "email": "ates122@gmail.com",
             "telephone": "+380989898989",
             "company": "Company",
             "website": "www.company-site.net",
             "tax": "123456",
             "payment": "paypal",
-            "paypal": "atest122@gmail.com",
+            "paypal": "atet122@gmail.com",
             "password": "12345",
             "confirm": "12345",
             "agree": 1,
         }
         register_request = requests.post(
-            "http://localhost/index.php?route=affiliate/register", params
+            f"https://{device.connections.main.ip}/index.php?route=affiliate/register",
+            params,
+            verify=False,
         )
-        assert "Your Affiliate Account Has Been Created!" in register_request.text
+        assert "success" in register_request.url
 
 
 if __name__ == "__main__":

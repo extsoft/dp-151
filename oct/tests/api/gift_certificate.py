@@ -1,4 +1,5 @@
 # pylint: disable=no-self-use # pyATS-related exclusion
+from pyats.topology import Device
 from pyats.aetest import Testcase, test
 import requests
 import urllib3
@@ -7,7 +8,7 @@ from oct.tests import run_testcase
 
 class GiftCertificate(Testcase):
     @test
-    def test_gift_certificate(self) -> None:
+    def test_gift_certificate(self, device: Device) -> None:
         urllib3.disable_warnings()
         parameters = {
             "to_name": "green22",
@@ -20,7 +21,9 @@ class GiftCertificate(Testcase):
             "agree": 1,
         }
         gift_request = requests.post(
-            "https://192.168.195.143/index.php?route=account/voucher", parameters, verify=False
+            f"https://{device.connections.main.ip}/index.php?route=account/voucher",
+            parameters,
+            verify=False,
         )
         assert "success" in gift_request.url
 
