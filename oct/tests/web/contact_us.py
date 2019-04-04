@@ -2,18 +2,19 @@
 
 
 from pyats.aetest import Testcase, test
+from pyats.topology import Device
 from selenium.webdriver import Remote
+from oct.pages.contact_us import ContactUsPage, ContactUsSuccessPage
 from oct.browsers import Chrome
 from oct.tests import run_testcase
-from oct.pages.contact_us import ContactUsPage, ContactUsSuccessPage
 
 
 class ContactUs(Testcase):
     @test
-    def test(self, grid: str) -> None:
+    def test(self, grid: str, device: Device) -> None:
         chrome: Remote = Chrome(grid)
         contact_us = ContactUsPage(chrome)
-        contact_us.open()
+        contact_us.open(device)
         contact_us.fill_contact_details("Alex", "alex@gmail.com", "Test data test data")
         contact_us.press_submit()
         assert ContactUsSuccessPage(chrome).loaded()

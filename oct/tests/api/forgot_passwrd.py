@@ -16,7 +16,7 @@ class ForgotPassword(Testcase):
     def creating_account(self, device: Device) -> None:
         assert "success" in UserRegistration(
             Identity("Test", "Test", "+380957772255"), Credentials(self.email, self.password, "0")
-        ).registration_response(device.connections.main.ip)
+        ).registration_response(device)
 
     @test
     def test_forgot_password_for_known_user(self, device: Device) -> None:

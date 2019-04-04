@@ -1,8 +1,8 @@
 from selenium.webdriver import Remote
+from pyats.topology import Device
 from oct.pages.base import Page
 from oct.pages.registration import PersonalDetails
 from oct.pages.registration import Password
-from oct.pages.registration import RegistrationSuccessPage
 from oct.pages.registration import RegisterAccountPage
 
 
@@ -39,8 +39,10 @@ class RegisterAffiliatePage(Page):
         self._password = Password(browser)
         self._press_continue = RegisterAccountPage(browser)
 
-    def open(self) -> None:
-        self._browser.get("https://localhost/index.php?route=affiliate/register")
+    def open(self, device: Device) -> None:
+        self._browser.get(
+            f"https://{device.connections.main.ip}/index.php?route=affiliate/register"
+        )
 
     def loaded(self) -> bool:
         return "Affiliate Program" in self._browser.title
@@ -75,10 +77,9 @@ class RegisterAffiliatePage(Page):
 class RegAffiliateSuccessPage(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
-        self._open = RegistrationSuccessPage(browser)
 
-    def open(self) -> None:
-        self._open.open()
+    def open(self, device: Device) -> None:
+        raise RuntimeError("This page won't be opened through an URL")
 
     def loaded(self) -> bool:
         return "Your Affiliate Account Has Been Created!" in self._browser.title

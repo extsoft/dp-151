@@ -1,4 +1,5 @@
 from selenium.webdriver import Remote
+from pyats.topology import Device
 from oct.pages.base import Page
 
 
@@ -48,8 +49,8 @@ class RegisterAccountPage(Page):
         self._details = PersonalDetails(browser)
         self._password = Password(browser)
 
-    def open(self) -> None:
-        self._browser.get("https://localhost/index.php?route=account/register")
+    def open(self, device: Device) -> None:
+        self._browser.get(f"https://{device.connections.main.ip}/index.php?route=account/register")
 
     def loaded(self) -> bool:
         return "Register Account" in self._browser.title
@@ -75,7 +76,7 @@ class RegistrationSuccessPage(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
 
-    def open(self) -> None:
+    def open(self, device: Device) -> None:
         raise RuntimeError("This page can't be open through an URL")
 
     def loaded(self) -> bool:

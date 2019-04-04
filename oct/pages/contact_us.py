@@ -1,4 +1,5 @@
 from selenium.webdriver import Remote
+from pyats.topology import Device
 from oct.pages.base import Page
 from oct.pages.registration import PersonalDetails
 
@@ -24,8 +25,10 @@ class ContactUsPage(Page):
         self._details = ContactDetails(browser)
         self._email = PersonalDetails(browser)
 
-    def open(self) -> None:
-        self._browser.get("http://localhost/index.php?route=information/contact")
+    def open(self, device: Device) -> None:
+        self._browser.get(
+            f"https://{device.connections.main.ip}/index.php?route=information/contact"
+        )
 
     def loaded(self) -> bool:
         return "Contact Us" in self._browser.title
@@ -43,10 +46,10 @@ class ContactUsSuccessPage(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
 
-    def open(self) -> None:
+    def open(self, device: Device) -> None:
         raise RuntimeError("This page couldn't be open through an URL")
 
     def loaded(self) -> bool:
         return (
-            "http://localhost/index.php?route=" "information/contact/success"
+            "https://localhost/index.php?route=" "information/contact/success"
         ) in self._browser.current_url

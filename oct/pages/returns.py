@@ -1,8 +1,9 @@
 from enum import Enum
 from selenium.webdriver import Remote
 from selenium.common.exceptions import NoSuchElementException
-from oct.pages.base import Page
+from pyats.topology import Device
 from oct.pages.registration import PersonalDetails
+from oct.pages.base import Page
 
 
 class Reason(Enum):
@@ -66,8 +67,10 @@ class ReturnsPage(Page):
         self._order_details = OrderDetails(browser)
         self._product_details = ProductDetails(browser)
 
-    def open(self) -> None:
-        self._browser.get("https://localhost/index.php?route=account/return/add")
+    def open(self, device: Device) -> None:
+        self._browser.get(
+            f"https://{device.connections.main.ip}/index.php?route=account/return/add"
+        )
 
     def loaded(self) -> bool:
         return "Account Login" in self._browser.title
@@ -108,7 +111,7 @@ class ReturnsSuccessPage(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
 
-    def open(self) -> None:
+    def open(self, device: Device) -> None:
         raise RuntimeError("This page is not available for open through an URL")
 
     def loaded(self) -> bool:
