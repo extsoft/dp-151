@@ -1,15 +1,26 @@
 # pylint: disable=no-self-use # pyATS-related exclusion
 import urllib3
-from pyats.aetest import Testcase, test
+from pyats.aetest import Testcase, test, setup
 from pyats.topology import Device
 import requests
 from oct.tests import run_testcase
+from oct.tests.api.registration_pattern import UserRegistration, Identity, Credentials
+from oct.tests.web.creating_emails import EmailsGeneration
 
 
 class ForgotPassword(Testcase):
+    email = EmailsGeneration().creating_full_email()
+    password = "12345678"
+
+    @setup
+    def creating_account(self, device: Device) -> None:
+        assert "success" in UserRegistration(
+            Identity("Test", "Test", "+380957772255"), Credentials(self.email, self.password, "0")
+        ).registration_response(device.connections.main.ip)
+
     @test
     def test_forgot_password_for_known_user(self, device: Device) -> None:
-        parameters = {"email": "testerwom@gmail.com"}
+        parameters = {"email": self.email}
         urllib3.disable_warnings()
         request = requests.post(
             f"https://{device.connections.main.ip}/index.php?route=account/forgotten",
