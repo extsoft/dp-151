@@ -1,5 +1,6 @@
 from selenium.webdriver import Remote
 from selenium.common.exceptions import NoSuchElementException
+from pyats.topology import Device
 from oct.pages.base import Page
 
 
@@ -56,9 +57,10 @@ class ProductPage(Page):
         self._info_block = InformationBlock(browser)
         self._message_block = MessageBlock(browser)
 
-    def open(self) -> None:
+    def open(self, device: Device) -> None:
         self._browser.get(
-            f"http://localhost/index.php?route=product/product&path=20_27&product_"
+            f"https://{device.connections.main.ip}/"
+            f"index.php?route=product/product&path=20_27&product_"
             f"id={self._product_id}"
         )
 

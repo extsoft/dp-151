@@ -2,6 +2,7 @@
 import sys
 import os
 from typing import Tuple, Any, List
+import time
 
 from pyats import easypy
 
@@ -90,6 +91,7 @@ def tests_runner(test_suite: Tuple, instance: Any) -> List:  # type: ignore
 
 def main(runtime: EasypyRuntime) -> None:
     if "passed" in tests_runner(_deployment_test, runtime.testbed):
+        time.sleep(60)
         if "failed" not in tests_runner(_api_tests, runtime.testbed):
             tests_runner(_web_tests, runtime.testbed)
         tests_runner(_destroy_test, runtime.testbed)

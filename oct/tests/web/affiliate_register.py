@@ -1,20 +1,19 @@
 # pylint: disable=no-self-use # pyATS-related exclusion
-
-
+from pyats.topology import Device
 from pyats.aetest import Testcase, test
 from selenium.webdriver import Remote
-from oct.browsers import Chrome
 from oct.tests import run_testcase
+from oct.browsers import Chrome
 from oct.pages.affiliate_register import RegisterAffiliatePage
 from oct.pages.affiliate_register import RegAffiliateSuccessPage
 
 
 class RegistrationAffiliate(Testcase):
     @test
-    def test(self, grid: str) -> None:
+    def test(self, grid: str, device: Device) -> None:
         chrome: Remote = Chrome(grid)
         registration = RegisterAffiliatePage(chrome)
-        registration.open()
+        registration.open(device)
         registration.fill_personal_details("Jon", "Doe", "test10@gmail.com", "123456112")
         registration.press_pay_method()
         registration.fill_information(

@@ -15,7 +15,7 @@ class Login(Testcase):
     def create_account(self, device: Device) -> None:
         assert "success" in UserRegistration(
             Identity("Alex", "Ivanov", "+38090890812"), Credentials(self.email, self.password, "0")
-        ).registration_response(device.connections.main.ip)
+        ).registration_response(device)
 
     @test
     def login_exists_credentials(self, device: Device) -> None:

@@ -1,5 +1,4 @@
 from enum import Enum
-
 from selenium.webdriver import Remote
 from selenium.common.exceptions import NoSuchElementException
 

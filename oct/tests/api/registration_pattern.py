@@ -1,5 +1,6 @@
 import urllib3
 import requests
+from pyats.topology import Device
 
 
 class Identity:
@@ -39,10 +40,10 @@ class UserRegistration:
         self._identity = identity
         self._credentials = credentials
 
-    def registration_response(self, domain_name: str) -> str:
+    def registration_response(self, device: Device) -> str:
         urllib3.disable_warnings()
         return requests.post(
-            f"https://{domain_name}//index.php?route=account/register",
+            f"https://{device.connections.main.ip}//index.php?route=account/register",
             {
                 "customer_group_id": "1",
                 "firstname": self._identity.get_first_name(),

@@ -12,7 +12,7 @@ class Registration(Testcase):
         assert "success" in UserRegistration(
             Identity("Alex", "Ivanov", "+38090890812"),
             Credentials(EmailsGeneration().creating_full_email(), "12345678", "0"),
-        ).registration_response(device.connections.main.ip)
+        ).registration_response(device)
 
 
 if __name__ == "__main__":

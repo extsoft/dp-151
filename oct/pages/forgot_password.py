@@ -1,5 +1,6 @@
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import Remote
+from pyats.topology import Device
 from oct.pages.base import Page
 from oct.pages.registration import PersonalDetails
 
@@ -9,8 +10,8 @@ class ForgotPasswordPage:
         self._browser = browser
         self._users_email = PersonalDetails(browser)
 
-    def open(self) -> None:
-        self._browser.get("https://localhost/index.php?route=account/forgotten")
+    def open(self, device: Device) -> None:
+        self._browser.get(f"https://{device.connections.main.ip}/index.php?route=account/forgotten")
 
     def loaded(self) -> bool:
         return "Forgot Your Password?" in self._browser.title
@@ -26,8 +27,8 @@ class ConfirmationMessage(Page):
     def __init__(self, browser: Remote):
         self._browser = browser
 
-    def open(self) -> None:
-        self._browser.get("https://localhost/index.php?route=account/account")
+    def open(self, device: Device) -> None:
+        self._browser.get(f"https://{device.connections.main.ip}/index.php?route=account/account")
 
     def loaded(self) -> bool:
         try:

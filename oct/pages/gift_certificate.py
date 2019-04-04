@@ -1,5 +1,6 @@
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import Remote
+from pyats.topology import Device
 from oct.pages.base import Page
 
 
@@ -7,8 +8,8 @@ class GiftCertificate(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
 
-    def open(self) -> None:
-        self._browser.get("https://localhost/index.php?route=account/voucher")
+    def open(self, device: Device) -> None:
+        self._browser.get(f"https://{device.connections.main.ip}/index.php?route=account/voucher")
 
     def loaded(self) -> bool:
         return "Purchase a Gift Certificate" in self._browser.title
@@ -43,7 +44,7 @@ class PurchaseSuccessful(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
 
-    def open(self) -> None:
+    def open(self, device: Device) -> None:
         raise RuntimeError("This page can't be received via URL")
 
     def loaded(self) -> bool:

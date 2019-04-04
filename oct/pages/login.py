@@ -1,4 +1,5 @@
 from selenium.webdriver import Remote
+from pyats.topology import Device
 from oct.pages.base import Page
 from oct.pages.registration import PersonalDetails, Password
 
@@ -9,8 +10,8 @@ class LoginPage(Page):
         self._email = PersonalDetails(browser)
         self._password = Password(browser)
 
-    def open(self) -> None:
-        self._browser.get("https://localhost/index.php?route=account/login")
+    def open(self, device: Device) -> None:
+        self._browser.get(f"https://{device.connections.main.ip}/index.php?route=account/login")
 
     def loaded(self) -> bool:
         return "Account Login" in self._browser.title
