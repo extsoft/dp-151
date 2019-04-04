@@ -66,7 +66,8 @@ _web_tests = (
     share,
 )
 
-_deployment_tests = (deploy_app, destroy_app)
+_deployment_test = (deploy_app,)
+_destroy_test = (destroy_app,)
 
 
 def tests_runner(test_suite: Tuple, instance: Any) -> List:  # type: ignore
@@ -88,8 +89,10 @@ def tests_runner(test_suite: Tuple, instance: Any) -> List:  # type: ignore
 
 
 def main(runtime: EasypyRuntime) -> None:
-    if "failed" not in tests_runner(_api_tests, runtime.testbed):
-        tests_runner(_web_tests, runtime.testbed)
+    if "passed" in tests_runner(_deployment_test, runtime.testbed):
+        if "failed" not in tests_runner(_api_tests, runtime.testbed):
+            tests_runner(_web_tests, runtime.testbed)
+        tests_runner(_destroy_test, runtime.testbed)
 
 
 if __name__ == "__main__":
