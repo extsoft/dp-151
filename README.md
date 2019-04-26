@@ -97,3 +97,28 @@ If you need to destroy application, run in the terminal
 ```bash
 sudo docker-compose down
 ```
+
+### Create local virtual machine
+If you want to create virtual machine on your pc you need to install: 
+1. [Vagrant] (https://www.vagrantup.com/) a tool for building and managing virtual 
+machine environments in a single workflow.
+2. [Virtualbox] (https://www.virtualbox.org/) a general-purpose full virtualizer.
+and run in terminal 
+```bash
+vagrant up
+```
+
+After that you can run deploy test and enter in the browser's search field 
+```text
+https://192.168.33.10
+```
+
+If you need to shutdown virtual machine run in the terminal
+```bash
+vagrant halt dp-151_app
+```
+
+If you need to delete virtual machine, run in the terminal
+```bash
+vagrant destroy
+```
