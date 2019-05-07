@@ -4,9 +4,9 @@ testbed:
       selenium-grid: http://localhost:9515
     servers:
       server_alias:
-        address: 192.168.195.143
-        username: adminaccount
-        password: Install_new!
+        address: 192.168.33.10
+        username: vagrant
+        password: vagrant
 devices:
     vm:
         os: 'linux'
@@ -15,8 +15,8 @@ devices:
                 via: main
                 alias: default
             main:
-                username: adminaccount
+                username: vagrant
                 protocol: ssh
-                ip: 192.168.195.143
-                password: Install_new!
+                ip: 192.168.33.10
+                password: vagrant
         type: 'linux'

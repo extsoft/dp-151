@@ -19,5 +19,6 @@ services:
       kompose.service.type: nodeport
     ports:
       - '443:443'
+      - '80:80'
     depends_on:
       - mariadb

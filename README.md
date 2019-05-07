@@ -83,6 +83,38 @@ In order to run code assessment, you need to run `./code-assessment.sh` command 
 that there is no message like **_Code assessment is failed! Please fix errors!!!_**. If you face
 the massage, please fix all violations.
 
+### Creating a virtual machine for application using Vagrant 
+To be able to use this type of run, you need to have Vagrant engine release 2.2.4+ and Virtualbox 
+engine release  5.2.28+. 
+
+A simple way to check Vagrant: 
+```bash
+vagrant --version
+```
+
+A simple way to check Virtualbox:
+```bash
+vboxmanage --version
+``` 
+
+First of all, you need to run:
+```bash
+vagrant up
+```
+
+Then you can run  `suite.py` to run all tests 
+
+
+If you want to shutdown vm you must run:
+```bash
+vagrant halt
+``` 
+
+If you want to delete vm you must run:
+```bash
+vagrant destroy
+```
+
 ### Deploy and destroy application
 If you want to deploy the application to localhost, you need to run in the terminal
 ```bash
@@ -97,3 +129,7 @@ If you need to destroy application, run in the terminal
 ```bash
 sudo docker-compose down
 ```
+
+
+
+
