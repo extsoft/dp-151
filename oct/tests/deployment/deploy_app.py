@@ -14,7 +14,7 @@ def copy_file_to_server(device: Device) -> None:
     futils = FileUtils(testbed=device.testbed)
     futils.copyfile(
         source=f"{os.path.join(os.getcwd(), 'docker-compose.yaml')}",
-        destination=f"scp://{device.connections.main.ip}/home/adminaccount/oct",
+        destination=f"scp://{device.connections.main.ip}/home/vagrant/oct",
     )
 
 
