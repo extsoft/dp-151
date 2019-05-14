@@ -2,19 +2,21 @@
 import requests
 from pyats.aetest import Testcase, test, setup
 from pyats.topology import Device
+from mimesis import Person
 from oct.tests import run_testcase
 from oct.tests.api.registration_pattern import UserRegistration, Identity, Credentials
-from oct.tests.web.creating_emails import EmailsGeneration
 
 
 class Login(Testcase):
-    email = EmailsGeneration().creating_full_email()
-    password = "12345638"
+    generator = Person()
+    email = generator.email()
+    password = generator.password()
 
     @setup
     def create_account(self, device: Device) -> None:
         assert "success" in UserRegistration(
-            Identity("Alex", "Ivanov", "+38090890812"), Credentials(self.email, self.password, "0")
+            Identity(self.generator.name(), self.generator.last_name(), self.generator.telephone()),
+            Credentials(self.email, self.password, "0"),
         ).registration_response(device)
 
     @test
