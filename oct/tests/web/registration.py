@@ -2,10 +2,10 @@
 from pyats.aetest import Testcase, test
 from pyats.topology import Device
 from selenium.webdriver import Remote
+from mimesis import Person
 from oct.pages.registration import RegisterAccountPage, RegistrationSuccessPage
 from oct.browsers import Chrome
 from oct.tests import run_testcase
-from oct.tests.web.creating_emails import EmailsGeneration
 
 
 class Registration(Testcase):
@@ -13,12 +13,12 @@ class Registration(Testcase):
     def test(self, grid: str, device: Device) -> None:
         chrome: Remote = Chrome(grid)
         registration = RegisterAccountPage(chrome)
-        random_email = EmailsGeneration()
         registration.open(device)
+        generator = Person()
         registration.fill_personal_details(
-            "Jon", "Doe", random_email.creating_full_email(), "123456"
+            generator.name(), generator.last_name(), generator.email(), generator.telephone()
         )
-        registration.fill_password("supersecret")
+        registration.fill_password(generator.password())
         registration.press_continue()
         assert RegistrationSuccessPage(chrome).loaded()
 

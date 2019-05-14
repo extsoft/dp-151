@@ -1,17 +1,18 @@
 # pylint: disable=no-self-use # pyATS-related exclusion
 from pyats.aetest import Testcase, test
 from pyats.topology import Device
+from mimesis import Person
 from oct.tests import run_testcase
 from oct.tests.api.registration_pattern import UserRegistration, Identity, Credentials
-from oct.tests.web.creating_emails import EmailsGeneration
 
 
 class Registration(Testcase):
     @test
     def registration_positive_test(self, device: Device) -> None:
+        generator = Person()
         assert "success" in UserRegistration(
-            Identity("Alex", "Ivanov", "+38090890812"),
-            Credentials(EmailsGeneration().creating_full_email(), "12345678", "0"),
+            Identity(generator.name(), generator.last_name(), generator.telephone()),
+            Credentials(generator.email(), generator.password(), "0"),
         ).registration_response(device)
 
 

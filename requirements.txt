@@ -4,4 +4,5 @@ requests==2.21.0
 urllib3==1.24.2
 paramiko==2.4.2
 scp==0.13.2
-
+mimesis==3.1.0
+personal==0.1.1
