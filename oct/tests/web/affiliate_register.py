@@ -1,4 +1,5 @@
 # pylint: disable=no-self-use # pyATS-related exclusion
+from mimesis import Person
 from pyats.topology import Device
 from pyats.aetest import Testcase, test
 from selenium.webdriver import Remote
@@ -13,13 +14,19 @@ class RegistrationAffiliate(Testcase):
     def test(self, grid: str, device: Device) -> None:
         chrome: Remote = Chrome(grid)
         registration = RegisterAffiliatePage(chrome)
+        generator = Person()
         registration.open(device)
-        registration.fill_personal_details("Jon", "Doe", "test10@gmail.com", "123456112")
+        registration.fill_personal_details(
+            generator.name(), generator.last_name(), generator.email(), generator.telephone()
+        )
         registration.press_pay_method()
         registration.fill_information(
-            "one company", "www.website.com", "2332153467", "test10@gmail.com"
+            generator.full_name(),
+            f"www.{generator.username()}.com",
+            "2332153467",
+            generator.email(),
         )
-        registration.fill_password("54321qwertyui")
+        registration.fill_password(generator.password())
         registration.press_continue()
         assert RegAffiliateSuccessPage(chrome).loaded()
 
