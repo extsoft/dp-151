@@ -107,3 +107,6 @@ venv.bak/
 # pyATS staffs
 archive/
 runinfo/
+
+#Vagrant
+.vagrant
