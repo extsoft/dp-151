@@ -1,4 +1,5 @@
 # pylint: disable=no-self-use # pyATS-related exclusion
+from mimesis import Person
 import urllib3
 import requests
 from pyats.aetest import test, Testcase
@@ -10,18 +11,19 @@ class AffiliateReg(Testcase):
     @test
     def test_affiliate_reg(self, device: Device) -> None:
         urllib3.disable_warnings()
+        generator = Person()
         params = {
-            "firstname": "Alex",
-            "lastname": "Second",
-            "email": "ates122@gmail.com",
-            "telephone": "+380989898989",
-            "company": "Company",
-            "website": "www.company-site.net",
+            "firstname": generator.name(),
+            "lastname": generator.last_name(),
+            "email": generator.email(),
+            "telephone": generator.telephone(),
+            "company": generator.full_name(),
+            "website": f"www.{generator.username()}.net",
             "tax": "123456",
             "payment": "paypal",
-            "paypal": "atet122@gmail.com",
-            "password": "12345",
-            "confirm": "12345",
+            "paypal": generator.email(),
+            "password": generator.password(),
+            "confirm": generator.password(),
             "agree": 1,
         }
         register_request = requests.post(
