@@ -7,7 +7,7 @@ from pyats.topology import Device
 from pyats.aetest import Testcase, test
 from requests.exceptions import ConnectTimeout, ReadTimeout
 from oct.tests import run_testcase
-from oct.tests.deployment.deploy_app import is_deploy_app
+from oct.tests.deployment.deploy_app import is_deploy_app, Status
 
 
 class DestroyApp(Testcase):
@@ -17,7 +17,7 @@ class DestroyApp(Testcase):
             server.connect()
             server.execute("cd oct")
             server.execute("docker-compose down")
-            assert is_deploy_app(server, 0)
+            assert is_deploy_app(server, Status.OFF.value)
             server.execute("cd ~")
             server.execute("rm -rf oct")
         except (ConnectTimeout, ReadTimeout):
