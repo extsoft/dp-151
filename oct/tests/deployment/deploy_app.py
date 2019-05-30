@@ -26,6 +26,7 @@ def copy_file_to_server(device: Device) -> None:
 
 
 def is_deploy_app(device: Device, is_run: int) -> bool:
+
     non_empty_lines_counter = 0
     for iterator in device.execute("docker-compose ps -q"):
         if iterator == "\n":
