@@ -10,22 +10,20 @@ class GiftCertificate(Testcase):
     @test
     def test_gift_certificate(self, device: Device) -> None:
         urllib3.disable_warnings()
-        parameters = {
-            "to_name": "green22",
-            "to_email": "green222@gmail.com",
-            "from_name": "red22",
-            "from_email": "red222@gmail.com",
-            "voucher_theme_id": 7,
-            "message": "some text",
-            "amount": 1,
-            "agree": 1,
-        }
-        gift_request = requests.post(
+        assert "success" in requests.post(
             f"https://{device.connections.main.ip}/index.php?route=account/voucher",
-            parameters,
+            {
+                "to_name": "green22",
+                "to_email": "green222@gmail.com",
+                "from_name": "red22",
+                "from_email": "red222@gmail.com",
+                "voucher_theme_id": 7,
+                "message": "some text",
+                "amount": 1,
+                "agree": 1,
+            },
             verify=False,
         )
-        assert "success" in gift_request.url
 
 
 if __name__ == "__main__":

@@ -1,4 +1,5 @@
 # pylint: disable=no-self-use # pyATS-related exclusion
+from mimesis import Person
 import urllib3
 from pyats.topology import Device
 from pyats.aetest import Testcase, test
@@ -9,14 +10,17 @@ from oct.tests import run_testcase
 class ContactUs(Testcase):
     @test
     def test_contact_us(self, device: Device) -> None:
-        parameters = {"name": "Alex", "email": "test@gmail.com", "enquiry": "test data test data"}
         urllib3.disable_warnings()
-        request = requests.post(
+        generator = Person()
+        assert "success" in requests.post(
             f"https://{device.connections.main.ip}/index.php?route=information/contact",
-            parameters,
+            {
+                "name": generator.name(),
+                "email": generator.email(),
+                "enquiry": "test data test data",
+            },
             verify=False,
         )
-        assert "success" in request.url
 
 
 if __name__ == "__main__":
