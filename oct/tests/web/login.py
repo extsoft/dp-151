@@ -21,8 +21,8 @@ class Login(Testcase):
         ).registration_response(device)
 
     @test
-    def login_exists_credentials(self, grid: str, device: Device) -> None:
-        chrome: Remote = Chrome(grid)
+    def login_exists_credentials(self, device: Device) -> None:
+        chrome: Remote = Chrome()
         login = LoginPage(chrome)
         login.open(device)
         login.fill_credentials(self.email, self.password)
@@ -30,8 +30,8 @@ class Login(Testcase):
         assert AccountPage(chrome).loaded()
 
     @test
-    def login_nonexistent_email(self, grid: str, device: Device) -> None:
-        chrome: Remote = Chrome(grid)
+    def login_nonexistent_email(self, device: Device) -> None:
+        chrome: Remote = Chrome()
         login = LoginPage(chrome)
         login.open(device)
         login.fill_credentials("Er12asd@mailinator.com", self.password)
@@ -39,8 +39,8 @@ class Login(Testcase):
         assert not AccountPage(chrome).loaded()
 
     @test
-    def login_nonexistent_password(self, grid: str, device: Device) -> None:
-        chrome: Remote = Chrome(grid)
+    def login_nonexistent_password(self, device: Device) -> None:
+        chrome: Remote = Chrome()
         login = LoginPage(chrome)
         login.open(device)
         login.fill_credentials(self.email, "12345789")

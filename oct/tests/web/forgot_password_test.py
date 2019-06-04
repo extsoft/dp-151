@@ -20,8 +20,8 @@ class ForgotPassword(Testcase):
         ).registration_response(device)
 
     @test
-    def test_forgot_password(self, grid: str, device: Device) -> None:
-        chrome: Remote = Chrome(grid)
+    def test_forgot_password(self, device: Device) -> None:
+        chrome: Remote = Chrome()
         forgot_password = ForgotPasswordPage(chrome)
         forgot_password.open(device)
         forgot_password.fill_email(self.email)
@@ -29,8 +29,8 @@ class ForgotPassword(Testcase):
         assert ConfirmationMessage(chrome).loaded()
 
     @test
-    def test_forgot_password_with_not_existing_email(self, grid: str, device: Device) -> None:
-        chrome: Remote = Chrome(grid)
+    def test_forgot_password_with_not_existing_email(self, device: Device) -> None:
+        chrome: Remote = Chrome()
         forgot_password = ForgotPasswordPage(chrome)
         forgot_password.open(device)
         forgot_password.fill_email("testerwom777@gmail.com")

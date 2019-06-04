@@ -6,3 +6,4 @@ paramiko==2.4.2
 scp==0.13.2
 mimesis==3.1.0
 personal==0.1.1
+pytest==4.6.2

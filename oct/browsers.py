@@ -3,10 +3,18 @@ import weakref
 import logging
 from typing import Any
 
-from selenium.webdriver import Remote, ChromeOptions
+from selenium.webdriver import Remote
 
 
 _log = logging.getLogger(__name__)
+
+_chrome_settings = {
+    "version": "ANY",
+    "platform": "ANY",
+    "browserName": "chrome",
+    "os_version": "High Sierra",
+    "browser_version": "74.0.3729.169",
+}
 
 
 class Chrome:
@@ -19,13 +27,12 @@ class Chrome:
     It has the same interface that ``Remote`` object from ``selenium.webdriver`` module has.
     """
 
-    def __init__(self, grid: str) -> None:
+    def __init__(self) -> None:
         @functools.lru_cache()
         def con() -> Remote:
-            _log.info("Starting a browser session. Connect to: %s", grid)
-            remote = Remote(
-                command_executor=grid, desired_capabilities=ChromeOptions().to_capabilities()
-            )
+
+            _log.info("Starting a browser session. Connect to: %s", _chrome_settings)
+            remote = Remote("http://localhost:4444/wd/hub", _chrome_settings)
             remote.implicitly_wait(5)
             return remote
 
@@ -33,7 +40,7 @@ class Chrome:
 
         def close(cache: Any) -> None:
             if cache.cache_info().currsize > 0:
-                _log.info("Closing the browser session. Disconnect from %s", grid)
+                _log.info("Closing the browser session. Disconnect from %s", _chrome_settings)
                 cache().quit()
 
         weakref.finalize(self, close, self._client)

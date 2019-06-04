@@ -10,8 +10,8 @@ from oct.pages.brands import BrandsPage, BrandList
 
 class AllBrands(Testcase):
     @test
-    def test(self, grid: str, device: Device) -> None:
-        chrome: Remote = Chrome(grid)
+    def test(self, device: Device) -> None:
+        chrome: Remote = Chrome()
         brands_page = BrandsPage(chrome)
         brands_page.open(device)
         brands_page.click_brand_name(BrandList.APPLE)
