@@ -16,7 +16,7 @@ class ContactUs(Testcase):
             parameters,
             verify=False,
         )
-        assert "success" in request.url
+        assert "success" in request.text
 
 
 if __name__ == "__main__":

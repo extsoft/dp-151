@@ -19,7 +19,7 @@ class AffiliateReg(Testcase):
             "telephone": generator.telephone(),
             "company": generator.full_name(),
             "website": f"www.{generator.username()}.net",
-            "tax": "123456",
+            "tax": "2332153467",
             "payment": "paypal",
             "paypal": generator.email(),
             "password": generator.password(),
@@ -31,7 +31,8 @@ class AffiliateReg(Testcase):
             params,
             verify=False,
         )
-        assert "success" in register_request.url
+        print()
+        assert "success" in register_request.text
 
 
 if __name__ == "__main__":

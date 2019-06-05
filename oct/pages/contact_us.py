@@ -51,5 +51,5 @@ class ContactUsSuccessPage(Page):
 
     def loaded(self) -> bool:
         return (
-            "https://localhost/index.php?route=" "information/contact/success"
+            "information/contact/success"
         ) in self._browser.current_url
