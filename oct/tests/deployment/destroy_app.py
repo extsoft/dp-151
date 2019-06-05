@@ -14,6 +14,7 @@ class DestroyApp(Testcase):
     @test
     def destroy_app(self, server: Device) -> None:
         try:
+            server.disconnect()
             server.connect()
             server.execute("cd oct")
             server.execute("docker-compose down")
