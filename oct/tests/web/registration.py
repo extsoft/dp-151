@@ -6,6 +6,7 @@ from mimesis import Person
 from oct.pages.registration import RegisterAccountPage, RegistrationSuccessPage
 from oct.browsers import Chrome
 from oct.tests import run_testcase
+import time
 
 
 class Registration(Testcase):
@@ -20,6 +21,7 @@ class Registration(Testcase):
         )
         registration.fill_password(generator.password())
         registration.press_continue()
+        time.sleep(3)
         assert RegistrationSuccessPage(chrome).loaded()
 
 

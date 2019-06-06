@@ -50,6 +50,4 @@ class ContactUsSuccessPage(Page):
         raise RuntimeError("This page couldn't be open through an URL")
 
     def loaded(self) -> bool:
-        return (
-            "information/contact/success"
-        ) in self._browser.current_url
+        return ("information/contact/success") in self._browser.current_url

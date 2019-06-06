@@ -80,4 +80,4 @@ class RegistrationSuccessPage(Page):
         raise RuntimeError("This page can't be open through an URL")
 
     def loaded(self) -> bool:
-        return "Your Account Has Been Created!" in self._browser.title
+        return "success" in self._browser.current_url
