@@ -4,6 +4,7 @@ from typing import Dict, Any
 from pyats import aetest
 from pyats.topology import loader
 from pyats.topology.testbed import Testbed
+from tests import Rules, testbed_rules
 
 
 def mandatory_aetest_arguments(testbed: Testbed, device_name: str) -> Dict[str, Any]:
@@ -16,4 +17,6 @@ def mandatory_aetest_arguments(testbed: Testbed, device_name: str) -> Dict[str, 
 
 
 def run_testcase(testbed_file: str = "testbed.yaml", device_name: str = "vm") -> None:
-    aetest.main(**mandatory_aetest_arguments(loader.load(testbed_file), device_name))
+    testbed = loader.load(testbed_file)
+    Rules(rules=testbed_rules).validate(testbed=testbed)
+    aetest.main(**mandatory_aetest_arguments(testbed, device_name))

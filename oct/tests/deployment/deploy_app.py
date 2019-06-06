@@ -2,12 +2,19 @@
 # pylint: disable=no-member
 # pylint: disable=invalid-name
 # pylint: disable=too-many-branches
+
 import os
+from enum import Enum
 from pyats.topology import Device
 from pyats.aetest import Testcase, test
 from pyats.utils.fileutils import FileUtils
 from requests.exceptions import ConnectTimeout
 from oct.tests import run_testcase
+
+
+class Status(Enum):
+    ON = 2
+    OFF = 0
 
 
 def copy_file_to_server(device: Device) -> None:
@@ -18,12 +25,12 @@ def copy_file_to_server(device: Device) -> None:
     )
 
 
-def is_deploy_app(device: Device, lines: int) -> bool:
+def is_deploy_app(device: Device, is_run: int) -> bool:
     non_empty_lines_counter = 0
     for iterator in device.execute("docker-compose ps -q"):
         if iterator == "\n":
             non_empty_lines_counter += 1
-    return non_empty_lines_counter == lines
+    return non_empty_lines_counter == is_run
 
 
 class DeployApp(Testcase):
@@ -35,7 +42,7 @@ class DeployApp(Testcase):
             copy_file_to_server(device)
             device.execute("cd oct")
             device.execute(f"APP_HOST={device.connections.main.ip} docker-compose up -d")
-            assert is_deploy_app(device, 2)
+            assert is_deploy_app(device, Status.ON.value)
         except ConnectTimeout:
             self.failed()
         finally:

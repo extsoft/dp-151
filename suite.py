@@ -34,7 +34,7 @@ from oct.tests.api import returns
 from oct.tests.api import review
 from oct.tests.deployment import deploy_app
 from oct.tests.deployment import destroy_app
-
+from tests import Rules, testbed_rules
 
 _api_tests = (
     affiliate_register,
@@ -88,6 +88,7 @@ def tests_runner(test_suite: Tuple, instance: Any) -> List:  # type: ignore
 
 
 def main(runtime: EasypyRuntime) -> None:
+    Rules(rules=testbed_rules).validate(testbed=runtime.testbed)
     if "passed" in tests_runner(_deployment_test, runtime.testbed):
         time.sleep(60)
         if "failed" not in tests_runner(_api_tests, runtime.testbed):
