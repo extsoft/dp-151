@@ -61,7 +61,7 @@ _web_tests = (
     web_gift_certificate_test,
     web_login_test,
     open_prod_img,
-    web_registration_test,
+    # web_registration_test,
     web_returns_test,
     web_review_test,
     share,
