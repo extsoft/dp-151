@@ -8,4 +8,4 @@ script:
   - ./code-assessment.sh
   - docker run --rm -tid --name zalenium -p 4444:4444 --privileged dosel/zalenium start
   - docker-compose up -d
-  - ./test-assessment.sh
+  - ./tests-assesment.sh
