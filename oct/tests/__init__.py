@@ -16,7 +16,6 @@ def mandatory_aetest_arguments(testbed: Testbed, device_name: str) -> Dict[str, 
     }
 
 
-
 def run_testcase(testbed_file: str = "testbed.yaml", device_name: str = "vm") -> None:
     testbed = loader.load(testbed_file)
     Rules(rules=testbed_rules).validate(testbed=testbed)
