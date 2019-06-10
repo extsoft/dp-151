@@ -5,7 +5,7 @@ add_fail() {
     FAILURES+=("$1")
 }
 
-python suite.py -testbed_file testbed.yaml  || add_fail easypy
+python suite_travis.py -testbed_file testbed.yaml  || add_fail easypy
 if [[ ${#FAILURES[@]} -ne 0 ]]; then
     cat <<RESULT
 
