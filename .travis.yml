@@ -6,6 +6,6 @@ install:
   - pip install -r requirements-dev.txt
 script:
   - ./code-assessment.sh
-  - docker run --rm -ti --name zalenium -p 4444:4444 --privileged dosel/zalenium start
+  - docker run --rm -tid --name zalenium -p 4444:4444 --privileged dosel/zalenium start
   - docker-compose up -d
   - ./test-assessment.sh
