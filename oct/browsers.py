@@ -13,7 +13,7 @@ _chrome_settings = {
     "platform": "ANY",
     "browserName": "chrome",
     "os_version": "High Sierra",
-    "browser_version": "74.0.3729.169",
+    "browser_version": "ANY",
 }
 
 
