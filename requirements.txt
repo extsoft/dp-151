@@ -1,6 +1,6 @@
 pyats==5.1.0
 selenium==3.141.0
-requests==2.21.0
+requests==2.22.0
 urllib3==1.24.2
 paramiko==2.4.2
 scp==0.13.2
