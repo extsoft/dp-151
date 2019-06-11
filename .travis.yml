@@ -3,11 +3,12 @@ python:
   - "3.6.5"
 services:
   - docker
+before_install:
+  - docker run --rm -tid --name zalenium -p 4444:4444 --privileged dosel/zalenium start
+  - docker-compose up -d
 install:
   - pip install -r requirements.txt
   - pip install -r requirements-dev.txt
 script:
   - ./code-assessment.sh
-  - docker run --rm -tid --name zalenium -p 4444:4444 --privileged dosel/zalenium start
-  - docker-compose up -d
   - ./tests-assesment.sh
