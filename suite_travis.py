@@ -38,7 +38,7 @@ from oct.tests.deployment import destroy_app
 from tests import Rules, testbed_rules
 
 _api_tests = (
-    affiliate_register,
+    # affiliate_register,
     contact_us,
     forgot_passwrd,
     gift_certificate,
