@@ -32,3 +32,15 @@ devices:
                 protocol: ssh
                 ip: 127.0.0.1
         type: 'linux'
+    zalenium:
+        os: 'linux'
+        connections:
+            defaults:
+                via: main
+                alias: default
+            main:
+
+                protocol: ssh
+                ip: 172.33.0.3
+        type: 'linux'
+

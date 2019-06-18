@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   mariadb:
     image: 'bitnami/mariadb:10.1.38-debian-9-r33'
@@ -6,6 +6,7 @@ services:
       - MARIADB_USER=bn_opencart
       - MARIADB_DATABASE=bitnami_opencart
       - ALLOW_EMPTY_PASSWORD=yes
+
   opencart:
     image: 'bitnami/opencart:3.0.3-1-debian-9-r55'
     environment:
@@ -18,7 +19,14 @@ services:
     labels:
       kompose.service.type: nodeport
     ports:
-      - '443:443'
+      - '443'
       - '80:80'
     depends_on:
       - mariadb
+
+networks:
+  default:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.33.0.0/16
