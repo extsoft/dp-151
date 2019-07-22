@@ -1,4 +1,5 @@
 # pylint: disable=no-self-use # pyATS-related exclusion
+from mimesis import Person
 from pyats.aetest import Testcase, test, setup
 from pyats.topology import Device
 from selenium.webdriver import Remote
@@ -7,17 +8,18 @@ from oct.tests import run_testcase
 from oct.pages.login import LoginPage
 from oct.pages.account import AccountPage
 from oct.tests.api.registration_pattern import UserRegistration, Identity, Credentials
-from oct.tests.web.creating_emails import EmailsGeneration
 
 
 class Login(Testcase):
-    email = EmailsGeneration().creating_full_email()
-    password = "12345678"
+    data_generator = Person()
+    email = data_generator.email()
+    password = data_generator.password()
 
     @setup
     def create_account(self, device: Device) -> None:
         assert "success" in UserRegistration(
-            Identity("Petr", "Petrov", "+38090890812"), Credentials(self.email, self.password, "0")
+            Identity(Person().email(), Person().email(), Person().telephone()),
+            Credentials(self.email, self.password, "0"),
         ).registration_response(device)
 
     @test

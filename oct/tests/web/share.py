@@ -1,6 +1,4 @@
 # pylint: disable=no-self-use # pyATS-related exclusion
-
-
 from pyats.aetest import Testcase, test
 from pyats.topology import Device
 from selenium.webdriver import Remote
