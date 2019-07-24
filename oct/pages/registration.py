@@ -49,10 +49,10 @@ class RegisterAccountPage(Page):
         self._details = PersonalDetails(browser)
         self._password = Password(browser)
 
-    def open(self, device: Device) -> None:
+    def load(self, device: Device) -> None:
         self._browser.get(f"https://{device.connections.main.ip}/index.php?route=account/register")
 
-    def loaded(self) -> bool:
+    def available(self) -> bool:
         return "Register Account" in self._browser.title
 
     def fill_personal_details(
@@ -76,8 +76,8 @@ class RegistrationSuccessPage(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
 
-    def open(self, device: Device) -> None:
+    def load(self, device: Device) -> None:
         raise RuntimeError("This page can't be open through an URL")
 
-    def loaded(self) -> bool:
+    def available(self) -> bool:
         return "Your Account Has Been Created!" in self._browser.title

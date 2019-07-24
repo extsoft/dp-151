@@ -57,14 +57,14 @@ class ProductPage(Page):
         self._info_block = InformationBlock(browser)
         self._message_block = MessageBlock(browser)
 
-    def open(self, device: Device) -> None:
+    def load(self, device: Device) -> None:
         self._browser.get(
             f"https://{device.connections.main.ip}/"
             f"index.php?route=product/product&path=20_27&product_"
             f"id={self._product_id}"
         )
 
-    def loaded(self) -> bool:
+    def available(self) -> bool:
         return self._product_name in self._browser.title
 
     def open_product_image(self) -> None:

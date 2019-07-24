@@ -67,12 +67,12 @@ class ReturnsPage(Page):
         self._order_details = OrderDetails(browser)
         self._product_details = ProductDetails(browser)
 
-    def open(self, device: Device) -> None:
+    def load(self, device: Device) -> None:
         self._browser.get(
             f"https://{device.connections.main.ip}/index.php?route=account/return/add"
         )
 
-    def loaded(self) -> bool:
+    def available(self) -> bool:
         return "Account Login" in self._browser.title
 
     def fill_personal_details(
@@ -111,10 +111,10 @@ class ReturnsSuccessPage(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
 
-    def open(self, device: Device) -> None:
+    def load(self, device: Device) -> None:
         raise RuntimeError("This page is not available for open through an URL")
 
-    def loaded(self) -> bool:
+    def available(self) -> bool:
         try:
             return self._browser.find_element_by_xpath(
                 "//p[contains(text(), ' You will be notified via e-mail"

@@ -8,10 +8,10 @@ class GiftCertificate(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
 
-    def open(self, device: Device) -> None:
+    def load(self, device: Device) -> None:
         self._browser.get(f"https://{device.connections.main.ip}/index.php?route=account/voucher")
 
-    def loaded(self) -> bool:
+    def available(self) -> bool:
         return "Purchase a Gift Certificate" in self._browser.title
 
     def fill_certificate_data(
@@ -44,10 +44,10 @@ class PurchaseSuccessful(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
 
-    def open(self, device: Device) -> None:
+    def load(self, device: Device) -> None:
         raise RuntimeError("This page can't be received via URL")
 
-    def loaded(self) -> bool:
+    def available(self) -> bool:
         try:
             self._browser.find_element_by_xpath(
                 "//p[contains(text(), " "'Thank you for purchasing a gift certificate!')]"

@@ -12,14 +12,14 @@ class GiftCertificateTest(Testcase):
     def purchase_gift_certificate(self, grid: str, device: Device) -> None:
         chrome: Remote = Chrome(grid)
         gift = GiftCertificate(chrome)
-        gift.open(device)
+        gift.load(device)
         gift.fill_certificate_data(
             "green235", "green235@gmail.com", "green657", "green456@gmail.com"
         )
         gift.chose_certificate_theme()
         gift.click_gift_checkbox()
         gift.click_continue()
-        assert PurchaseSuccessful(chrome).loaded()
+        assert PurchaseSuccessful(chrome).available()
 
 
 if __name__ == "__main__":
