@@ -102,9 +102,9 @@ if __name__ == "__main__":
     # This configuration allow to replace `easypy` with a Python runner.
     #
     # It means that
-    #    easypy suite.py.py <...>
+    #    easypy -m oct <...>
     # you can replace with
-    #    python suite.py.py <...>
+    #    python -m oct <...>
     # where <...> are easypy's arguments.
     #
     # We add a name of this module as first parameter to the `sys.argv`
