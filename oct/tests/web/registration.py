@@ -13,14 +13,14 @@ class Registration(Testcase):
     def test(self, grid: str, device: Device) -> None:
         chrome: Remote = Chrome(grid)
         registration = RegisterAccountPage(chrome)
-        registration.open(device)
+        registration.load(device)
         generator = Person()
         registration.fill_personal_details(
             generator.name(), generator.last_name(), generator.email(), generator.telephone()
         )
         registration.fill_password(generator.password())
         registration.press_continue()
-        assert RegistrationSuccessPage(chrome).loaded()
+        assert RegistrationSuccessPage(chrome).available()
 
 
 if __name__ == "__main__":

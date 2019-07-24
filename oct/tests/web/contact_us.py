@@ -14,10 +14,10 @@ class ContactUs(Testcase):
     def test(self, grid: str, device: Device) -> None:
         chrome: Remote = Chrome(grid)
         contact_us = ContactUsPage(chrome)
-        contact_us.open(device)
+        contact_us.load(device)
         contact_us.fill_contact_details("Alex", "alex@gmail.com", "Test data test data")
         contact_us.press_submit()
-        assert ContactUsSuccessPage(chrome).loaded()
+        assert ContactUsSuccessPage(chrome).available()
 
 
 if __name__ == "__main__":

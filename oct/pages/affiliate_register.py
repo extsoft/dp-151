@@ -39,12 +39,12 @@ class RegisterAffiliatePage(Page):
         self._password = Password(browser)
         self._press_continue = RegisterAccountPage(browser)
 
-    def open(self, device: Device) -> None:
+    def load(self, device: Device) -> None:
         self._browser.get(
             f"https://{device.connections.main.ip}/index.php?route=affiliate/register"
         )
 
-    def loaded(self) -> bool:
+    def available(self) -> bool:
         return "Affiliate Program" in self._browser.title
 
     def fill_personal_details(
@@ -78,8 +78,8 @@ class RegAffiliateSuccessPage(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
 
-    def open(self, device: Device) -> None:
+    def load(self, device: Device) -> None:
         raise RuntimeError("This page won't be opened through an URL")
 
-    def loaded(self) -> bool:
+    def available(self) -> bool:
         return "Your Affiliate Account Has Been Created!" in self._browser.title
