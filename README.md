@@ -44,7 +44,10 @@ python oct/tests/web/sample.py
 ```
 where `oct/tests/web/sample.py` has to be replaced with desired test module.
 
-**_Please note!_** If you run WEB tests, please make sure you run the `chromedriver` binary first.
+**_Please note!_** If you run WEB tests, please make sure you run the `zalenium`
+```bash
+curl -sSL https://raw.githubusercontent.com/dosel/t/i/p | bash -s start
+```
 
 ## Development of automated tests
 All contributors have to follow 

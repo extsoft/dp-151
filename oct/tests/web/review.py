@@ -10,8 +10,8 @@ from oct.tests import run_testcase
 
 class UsersReview(Testcase):
     @test
-    def test(self, grid: str, device: Device) -> None:
-        chrome: Remote = Chrome(grid)
+    def test(self, device: Device) -> None:
+        chrome: Remote = Chrome()
         product_page = ProductPage(chrome, "33", "Samsung SyncMaster 941BW")
         product_page.load(device)
         product_page.open_review_link()

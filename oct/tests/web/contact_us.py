@@ -11,8 +11,8 @@ from oct.tests import run_testcase
 
 class ContactUs(Testcase):
     @test
-    def test(self, grid: str, device: Device) -> None:
-        chrome: Remote = Chrome(grid)
+    def test(self, device: Device) -> None:
+        chrome: Remote = Chrome()
         contact_us = ContactUsPage(chrome)
         contact_us.load(device)
         contact_us.fill_contact_details("Alex", "alex@gmail.com", "Test data test data")

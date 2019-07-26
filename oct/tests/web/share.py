@@ -12,8 +12,8 @@ from oct.pages.product_page import ProductPage
 
 class SharePopup(Testcase):
     @test
-    def test(self, grid: str, device: Device) -> None:
-        chrome: Remote = Chrome(grid)
+    def test(self, device: Device) -> None:
+        chrome: Remote = Chrome()
         product_page = ProductPage(chrome, "34", "iPod Shuffle")
         product_page.load(device)
         product_page.information_block().open_share_link()

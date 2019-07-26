@@ -9,8 +9,8 @@ from oct.tests import run_testcase
 
 class Returns(Testcase):
     @test
-    def test(self, grid: str, device: Device) -> None:
-        chrome: Remote = Chrome(grid)
+    def test(self, device: Device) -> None:
+        chrome: Remote = Chrome()
         returns = ReturnsPage(chrome)
         returns.load(device)
         returns.fill_personal_details("Alex", "Alekseev", "didilov.al@gmail.com", "123456")
