@@ -26,28 +26,28 @@ class Login(Testcase):
     def login_exists_credentials(self, grid: str, device: Device) -> None:
         chrome: Remote = Chrome(grid)
         login = LoginPage(chrome)
-        login.open(device)
+        login.load(device)
         login.fill_credentials(self.email, self.password)
         login.press_login_button()
-        assert AccountPage(chrome).loaded()
+        assert AccountPage(chrome).available()
 
     @test
     def login_nonexistent_email(self, grid: str, device: Device) -> None:
         chrome: Remote = Chrome(grid)
         login = LoginPage(chrome)
-        login.open(device)
+        login.load(device)
         login.fill_credentials("Er12asd@mailinator.com", self.password)
         login.press_login_button()
-        assert not AccountPage(chrome).loaded()
+        assert not AccountPage(chrome).available()
 
     @test
     def login_nonexistent_password(self, grid: str, device: Device) -> None:
         chrome: Remote = Chrome(grid)
         login = LoginPage(chrome)
-        login.open(device)
+        login.load(device)
         login.fill_credentials(self.email, "12345789")
         login.press_login_button()
-        assert not AccountPage(chrome).loaded()
+        assert not AccountPage(chrome).available()
 
 
 if __name__ == "__main__":

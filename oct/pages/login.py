@@ -10,10 +10,10 @@ class LoginPage(Page):
         self._email = PersonalDetails(browser)
         self._password = Password(browser)
 
-    def open(self, device: Device) -> None:
+    def load(self, device: Device) -> None:
         self._browser.get(f"https://{device.connections.main.ip}/index.php?route=account/login")
 
-    def loaded(self) -> bool:
+    def available(self) -> bool:
         return "Account Login" in self._browser.title
 
     def fill_credentials(self, email_address: str, password: str) -> None:

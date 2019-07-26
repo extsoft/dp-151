@@ -22,7 +22,7 @@ class Returns(Testcase):
         returns.fill_product_details("iMac", "892123", "1", "New item has some scratches")
         returns.choose_reason_and_condition(Reason.FAULTY, Condition.NEW)
         returns.press_submit()
-        assert ReturnsSuccessPage(chrome).loaded()
+        assert ReturnsSuccessPage(chrome).available()
 
 
 if __name__ == "__main__":

@@ -13,7 +13,7 @@ class UsersReview(Testcase):
     def test(self, grid: str, device: Device) -> None:
         chrome: Remote = Chrome(grid)
         product_page = ProductPage(chrome, "33", "Samsung SyncMaster 941BW")
-        product_page.open(device)
+        product_page.load(device)
         product_page.open_review_link()
         review_tab = Review(chrome)
         review_tab.type_name("AutoTestBot")

@@ -10,10 +10,10 @@ class ForgotPasswordPage:
         self._browser = browser
         self._users_email = PersonalDetails(browser)
 
-    def open(self, device: Device) -> None:
+    def load(self, device: Device) -> None:
         self._browser.get(f"https://{device.connections.main.ip}/index.php?route=account/forgotten")
 
-    def loaded(self) -> bool:
+    def available(self) -> bool:
         return "Forgot Your Password?" in self._browser.title
 
     def fill_email(self, email: str) -> None:
@@ -27,10 +27,10 @@ class ConfirmationMessage(Page):
     def __init__(self, browser: Remote):
         self._browser = browser
 
-    def open(self, device: Device) -> None:
+    def load(self, device: Device) -> None:
         self._browser.get(f"https://{device.connections.main.ip}/index.php?route=account/account")
 
-    def loaded(self) -> bool:
+    def available(self) -> bool:
         try:
             self._browser.find_element_by_css_selector("div.alert.alert-success.alert-dismissible")
             return True

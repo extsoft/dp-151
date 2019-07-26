@@ -25,12 +25,12 @@ class ContactUsPage(Page):
         self._details = ContactDetails(browser)
         self._email = PersonalDetails(browser)
 
-    def open(self, device: Device) -> None:
+    def load(self, device: Device) -> None:
         self._browser.get(
             f"https://{device.connections.main.ip}/index.php?route=information/contact"
         )
 
-    def loaded(self) -> bool:
+    def available(self) -> bool:
         return "Contact Us" in self._browser.title
 
     def fill_contact_details(self, your_name: str, email: str, enquiry: str) -> None:
@@ -46,10 +46,10 @@ class ContactUsSuccessPage(Page):
     def __init__(self, browser: Remote) -> None:
         self._browser = browser
 
-    def open(self, device: Device) -> None:
+    def load(self, device: Device) -> None:
         raise RuntimeError("This page couldn't be open through an URL")
 
-    def loaded(self) -> bool:
+    def available(self) -> bool:
         return (
             "https://localhost/index.php?route=" "information/contact/success"
         ) in self._browser.current_url

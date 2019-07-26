@@ -13,7 +13,7 @@ class OpeningProdImg(Testcase):
     def test(self, grid: str, device: Device) -> None:
         chrome: Remote = Chrome(grid)
         product_page = ProductPage(chrome, "41", "iMac")
-        product_page.open(device)
+        product_page.load(device)
         product_page.open_product_image()
         assert product_page.is_open_image()
 

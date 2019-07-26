@@ -12,8 +12,8 @@ class AddingProductToWishList(Testcase):
     def test_adding_to_wish_list(self, grid: str, device: Device) -> None:
         chrome: Remote = Chrome(grid)
         product_page = ProductPage(chrome, "41", "iMac")
-        product_page.open(device)
-        product_page.loaded()
+        product_page.load(device)
+        product_page.available()
         product_page.information_block().add_to_wish_list()
         assert product_page.messages().has_wish_list_message()
 

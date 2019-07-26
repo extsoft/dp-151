@@ -14,14 +14,14 @@ class GiftCertificateTest(Testcase):
         chrome: Remote = Chrome(grid)
         generator = Person()
         gift = GiftCertificate(chrome)
-        gift.open(device)
+        gift.load(device)
         gift.fill_certificate_data(
             generator.name(), generator.email(), generator.username(), generator.email()
         )
         gift.chose_certificate_theme()
         gift.click_gift_checkbox()
         gift.click_continue()
-        assert PurchaseSuccessful(chrome).loaded()
+        assert PurchaseSuccessful(chrome).available()
 
 
 if __name__ == "__main__":
