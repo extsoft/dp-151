@@ -34,7 +34,7 @@ pip install -r requirements.txt
 If you need to run whole tests suite, please run 
 
 ```bash
-python suite.py -testbed_file testbed.yaml
+python -m oct -testbed_file testbed.yaml
 ```  
 
 If you need to run a particular test, please run
