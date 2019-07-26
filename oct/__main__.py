@@ -15,7 +15,6 @@ from oct.tests.web import affiliate_register as web_affiliate_register_test
 from oct.tests.web import all_brands
 from oct.tests.web import brand
 from oct.tests.web import contact_us as web_contact_us_test
-from oct.tests.web import creating_emails
 from oct.tests.web import forgot_password_test
 from oct.tests.web import gift_certificate as web_gift_certificate_test
 from oct.tests.web import login as web_login_test
@@ -56,7 +55,6 @@ _web_tests = (
     all_brands,
     brand,
     web_contact_us_test,
-    creating_emails,
     forgot_password_test,
     web_gift_certificate_test,
     web_login_test,
@@ -102,9 +100,9 @@ if __name__ == "__main__":
     # This configuration allow to replace `easypy` with a Python runner.
     #
     # It means that
-    #    easypy suite.py.py <...>
+    #    easypy oct/__main__.py <...>
     # you can replace with
-    #    python suite.py.py <...>
+    #    python -m oct <...>
     # where <...> are easypy's arguments.
     #
     # We add a name of this module as first parameter to the `sys.argv`

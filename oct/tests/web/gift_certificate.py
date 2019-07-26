@@ -1,4 +1,5 @@
 # pylint: disable=no-self-use # pyATS-related exclusion
+from mimesis import Person
 from pyats.aetest import Testcase, test
 from pyats.topology import Device
 from selenium.webdriver import Remote
@@ -11,10 +12,11 @@ class GiftCertificateTest(Testcase):
     @test
     def purchase_gift_certificate(self, grid: str, device: Device) -> None:
         chrome: Remote = Chrome(grid)
+        generator = Person()
         gift = GiftCertificate(chrome)
         gift.load(device)
         gift.fill_certificate_data(
-            "green235", "green235@gmail.com", "green657", "green456@gmail.com"
+            generator.name(), generator.email(), generator.username(), generator.email()
         )
         gift.chose_certificate_theme()
         gift.click_gift_checkbox()

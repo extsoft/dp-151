@@ -1,16 +1,17 @@
 # pylint: disable=no-self-use # pyATS-related exclusion
+from mimesis import Person
 import urllib3
 from pyats.aetest import Testcase, test, setup
 from pyats.topology import Device
 import requests
 from oct.tests import run_testcase
 from oct.tests.api.registration_pattern import UserRegistration, Identity, Credentials
-from oct.tests.web.creating_emails import EmailsGeneration
 
 
 class ForgotPassword(Testcase):
-    email = EmailsGeneration().creating_full_email()
-    password = "12345678"
+    create_data = Person()
+    email = create_data.email()
+    password = create_data.password()
 
     @setup
     def creating_account(self, device: Device) -> None:
