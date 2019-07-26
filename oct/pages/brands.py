@@ -17,12 +17,12 @@ class BrandsPage(Page):
     def __init__(self, browser: Remote):
         self._browser = browser
 
-    def open(self, device: Device) -> None:
+    def load(self, device: Device) -> None:
         self._browser.get(
             f"https://{device.connections.main.ip}/index.php?route=product/manufacturer"
         )
 
-    def loaded(self) -> bool:
+    def available(self) -> bool:
         return "Find Your Favorite Brand" in self._browser.title
 
     def click_brand_name(self, brand: BrandList) -> None:

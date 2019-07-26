@@ -4,9 +4,9 @@ from pyats.topology import Device
 
 class Page(ABC):
     @abstractmethod
-    def open(self, device: Device) -> None:
+    def load(self, device: Device) -> None:
         pass
 
     @abstractmethod
-    def loaded(self) -> bool:
+    def available(self) -> bool:
         pass

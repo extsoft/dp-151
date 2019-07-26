@@ -15,7 +15,7 @@ class RegistrationAffiliate(Testcase):
         chrome: Remote = Chrome(grid)
         registration = RegisterAffiliatePage(chrome)
         generator = Person()
-        registration.open(device)
+        registration.load(device)
         registration.fill_personal_details(
             generator.name(), generator.last_name(), generator.email(), generator.telephone()
         )
@@ -28,7 +28,7 @@ class RegistrationAffiliate(Testcase):
         )
         registration.fill_password(generator.password())
         registration.press_continue()
-        assert RegAffiliateSuccessPage(chrome).loaded()
+        assert RegAffiliateSuccessPage(chrome).available()
 
 
 if __name__ == "__main__":

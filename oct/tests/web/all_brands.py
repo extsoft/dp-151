@@ -13,9 +13,9 @@ class AllBrands(Testcase):
     def test(self, grid: str, device: Device) -> None:
         chrome: Remote = Chrome(grid)
         brands_page = BrandsPage(chrome)
-        brands_page.open(device)
+        brands_page.load(device)
         brands_page.click_brand_name(BrandList.APPLE)
-        assert BrandPage(chrome, "8", "Apple").loaded()
+        assert BrandPage(chrome, "8", "Apple").available()
 
 
 if __name__ == "__main__":
