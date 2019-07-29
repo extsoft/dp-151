@@ -1,6 +1,6 @@
 # pylint: disable=no-self-use # pyATS-related exclusion
 
-
+from mimesis import Person
 from pyats.aetest import Testcase, test
 from pyats.topology import Device
 from selenium.webdriver import Remote
@@ -13,9 +13,10 @@ class ContactUs(Testcase):
     @test
     def test(self, grid: str, device: Device) -> None:
         chrome: Remote = Chrome(grid)
+        person = Person()
         contact_us = ContactUsPage(chrome)
         contact_us.load(device)
-        contact_us.fill_contact_details("Alex", "alex@gmail.com", "Test data test data")
+        contact_us.fill_contact_details(person.name(), person.email(), "Test data test data")
         contact_us.press_submit()
         assert ContactUsSuccessPage(chrome).available()
 

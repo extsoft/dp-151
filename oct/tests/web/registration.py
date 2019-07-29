@@ -14,11 +14,11 @@ class Registration(Testcase):
         chrome: Remote = Chrome(grid)
         registration = RegisterAccountPage(chrome)
         registration.load(device)
-        generator = Person()
+        person = Person()
         registration.fill_personal_details(
-            generator.name(), generator.last_name(), generator.email(), generator.telephone()
+            person.name(), person.last_name(), person.email(), person.telephone()
         )
-        registration.fill_password(generator.password())
+        registration.fill_password(person.password())
         registration.press_continue()
         assert RegistrationSuccessPage(chrome).available()
 

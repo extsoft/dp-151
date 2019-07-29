@@ -9,15 +9,11 @@ from oct.tests.api.affiliate_register import assert_if_request_contains_success_
 class ContactUs(Testcase):
     @test
     def test_contact_us(self, device: Device) -> None:
-        generator = Person()
+        person = Person()
         assert_if_request_contains_success_response_url(
             Post(
                 f"https://{device.connections.main.ip}/index.php?route=information/contact",
-                {
-                    "name": generator.name(),
-                    "email": generator.email(),
-                    "enquiry": "test data test data",
-                },
+                {"name": person.name(), "email": person.email(), "enquiry": "test data test data"},
             )
         )
 

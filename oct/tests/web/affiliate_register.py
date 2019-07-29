@@ -14,19 +14,16 @@ class RegistrationAffiliate(Testcase):
     def test(self, grid: str, device: Device) -> None:
         chrome: Remote = Chrome(grid)
         registration = RegisterAffiliatePage(chrome)
-        generator = Person()
+        person = Person()
         registration.load(device)
         registration.fill_personal_details(
-            generator.name(), generator.last_name(), generator.email(), generator.telephone()
+            person.name(), person.last_name(), person.email(), person.telephone()
         )
         registration.press_pay_method()
         registration.fill_information(
-            generator.full_name(),
-            f"www.{generator.username()}.com",
-            "2332153467",
-            generator.email(),
+            person.full_name(), f"www.{person.username()}.com", "2332153467", person.email()
         )
-        registration.fill_password(generator.password())
+        registration.fill_password(person.password())
         registration.press_continue()
         assert RegAffiliateSuccessPage(chrome).available()
 

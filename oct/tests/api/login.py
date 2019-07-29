@@ -8,14 +8,14 @@ from oct.tests.api.registration_pattern import UserRegistration, Identity, Crede
 
 
 class Login(Testcase):
-    generator = Person()
-    email = generator.email()
-    password = generator.password()
+    person = Person()
+    email = person.email()
+    password = person.password()
 
     @setup
     def create_account(self, device: Device) -> None:
         assert "success" in UserRegistration(
-            Identity(self.generator.name(), self.generator.last_name(), self.generator.telephone()),
+            Identity(self.person.name(), self.person.last_name(), self.person.telephone()),
             Credentials(self.email, self.password, "0"),
         ).registration_response(device)
 

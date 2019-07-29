@@ -25,23 +25,23 @@ class AffiliateReg(Testcase):
     @test
     def test_affiliate_reg(self, device: Device) -> None:
         urllib3.disable_warnings()
-        generator = Person()
+        person = Person()
         (
             assert_if_request_contains_success_response_url(
                 Post(
                     f"https://{device.connections.main.ip}/index.php?route=affiliate/register",
                     {
-                        "firstname": generator.name(),
-                        "lastname": generator.last_name(),
-                        "email": generator.email(),
-                        "telephone": generator.telephone(),
-                        "company": generator.full_name(),
-                        "website": f"www.{generator.username()}.net",
+                        "firstname": person.name(),
+                        "lastname": person.last_name(),
+                        "email": person.email(),
+                        "telephone": person.telephone(),
+                        "company": person.full_name(),
+                        "website": f"www.{person.username()}.net",
                         "tax": "123456",
                         "payment": "paypal",
-                        "paypal": generator.email(),
-                        "password": generator.password(),
-                        "confirm": generator.password(),
+                        "paypal": person.email(),
+                        "password": person.password(),
+                        "confirm": person.password(),
                         "agree": 1,
                     },
                 )
