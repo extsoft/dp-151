@@ -3,7 +3,7 @@ import logging
 from abc import ABC, abstractmethod
 import re
 from typing import Sequence, List
-from pyats.topology.testbed import Testbed
+from pyats.topology import Testbed
 
 
 _log: logging.Logger = logging.getLogger(__name__)
@@ -11,7 +11,7 @@ _log: logging.Logger = logging.getLogger(__name__)
 Result = collections.namedtuple("Result", "rule run_status reason")
 
 
-class Rule(ABC):
+class TestbedRule(ABC):
 
     ip_pattern = r"^\d{3}\.\d{3}\.\d{1,3}\.\d{1,3}$"
 
@@ -26,7 +26,7 @@ class Rule(ABC):
         pass
 
 
-class CheckUserCredentials(Rule):
+class CheckUserCredentials(TestbedRule):
     def is_passed(self, testbed: Testbed) -> List[Result]:
         results = []
         for device in testbed:
@@ -46,7 +46,7 @@ class CheckUserCredentials(Rule):
         return "Check user credentials"
 
 
-class CheckDevicesIp(Rule):
+class CheckDevicesIp(TestbedRule):
     def is_passed(self, testbed: Testbed) -> List[Result]:
         results = []
         for device in testbed:
@@ -64,7 +64,7 @@ class CheckDevicesIp(Rule):
         return "Check devices ip format"
 
 
-class CheckSeleniumGridUrl(Rule):
+class CheckSeleniumGridUrl(TestbedRule):
 
     url_pattern = r"^https?:\/\/.+:\d+$"
 
@@ -82,7 +82,7 @@ class CheckSeleniumGridUrl(Rule):
         return "Check Selenium grid url format"
 
 
-class CheckServerIp(Rule):
+class CheckServerIp(TestbedRule):
     def is_passed(self, testbed: Testbed) -> List[Result]:
         server_ip = testbed.servers.server_alias.address
         has_passed = bool(re.fullmatch(self.ip_pattern, server_ip))
@@ -97,8 +97,16 @@ class CheckServerIp(Rule):
         return "Check server ip format"
 
 
-class Rules:
-    def __init__(self, rules: Sequence[Rule]):
+class TestbedRules:
+    def __init__(
+        self,
+        rules: Sequence[TestbedRule] = (
+            CheckUserCredentials(),
+            CheckDevicesIp(),
+            CheckSeleniumGridUrl(),
+            CheckServerIp(),
+        ),
+    ):
         self._rules = rules
 
     def validate(self, testbed: Testbed) -> None:
