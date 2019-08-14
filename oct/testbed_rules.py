@@ -1,119 +1,80 @@
-import collections
 import logging
 from abc import ABC, abstractmethod
 import re
-from typing import Sequence, List
-from pyats.topology import Testbed
-
+from typing import Sequence, Iterable
+from pyats.topology import Testbed, Device
 
 _log: logging.Logger = logging.getLogger(__name__)
 
-Result = collections.namedtuple("Result", "rule run_status reason")
-
 
 class TestbedRule(ABC):
-
-    ip_pattern = r"^\d{3}\.\d{3}\.\d{1,3}\.\d{1,3}$"
-
     @abstractmethod
-    def is_passed(self, testbed: Testbed) -> List[Result]:
-        """Provides a result of rule execution"""
-        pass
+    def results(self, testbed: Testbed) -> Iterable["Result"]:
+        """Provides the results of rule execution."""
 
     @abstractmethod
     def __str__(self) -> str:
-        """Returns rule name"""
-        pass
+        """Returns rule name."""
 
 
-class CheckUserCredentials(TestbedRule):
-    def is_passed(self, testbed: Testbed) -> List[Result]:
-        results = []
-        for device in testbed:
+class Result:
+    def __init__(self, rule: TestbedRule, passed: bool, target: str):
+        self.rule = rule
+        self.passed = passed
+        self.details = target
+
+    def __str__(self) -> str:
+        return f"{self.rule} => {self.details}"
+
+
+class DevicesConnectivity(TestbedRule):
+    def __init__(self, connection_name: str):
+        self._connection_name = connection_name
+
+    def results(self, testbed: Testbed) -> Iterable[Result]:
+        def inspect(device: Device) -> Result:
+            connection = device.connections[self._connection_name]
+            identity = f"{device.name}['{connection.username}':'{connection.password}']"
             try:
                 device.connect()
-                results.append(Result(rule=self.__str__(), run_status=True, reason="Passed"))
-            except Exception:
-                message = (
-                    f'Could not connect to "{device}" with following credentials: '
-                    f"{device.connections.main.username}/{device.connections.main.password}"
-                )
-                results.append(Result(rule=self.__str__(), run_status=False, reason=message))
-                continue
-        return results
+                return Result(self, True, identity)
+            except Exception:  # pylint: disable=broad-except
+                return Result(self, False, identity)
+
+        return tuple(map(inspect, testbed))
 
     def __str__(self) -> str:
-        return "Check user credentials"
+        return f"Devices connectivity of '{self._connection_name}' connection"
 
 
-class CheckDevicesIp(TestbedRule):
-    def is_passed(self, testbed: Testbed) -> List[Result]:
-        results = []
-        for device in testbed:
-            device_ip = str(device.connections.main.ip)
-            has_passed = bool(re.fullmatch(self.ip_pattern, device_ip))
-            message = (
-                "Passed"
-                if has_passed
-                else f'"{device}" device: IP address "{device_ip}" does not conform to IP pattern "{self.ip_pattern}"'
-            )
-            results.append(Result(rule=self.__str__(), run_status=has_passed, reason=message))
-        return results
+class SeleniumGridUrlCorrectness(TestbedRule):
+    _url_pattern = r"^https?:\/\/.+:\d+$"
 
-    def __str__(self) -> str:
-        return "Check devices ip format"
-
-
-class CheckSeleniumGridUrl(TestbedRule):
-
-    url_pattern = r"^https?:\/\/.+:\d+$"
-
-    def is_passed(self, testbed: Testbed) -> List[Result]:
+    def results(self, testbed: Testbed) -> Iterable[Result]:
         grid_url = testbed.custom["selenium-grid"]
-        has_passed = bool(re.fullmatch(self.url_pattern, grid_url))
-        message = (
-            "Passed"
-            if has_passed
-            else f'Selenium grid url "{grid_url}" does not conform to url pattern "{self.url_pattern}"'
-        )
-        return [Result(rule=self.__str__(), run_status=has_passed, reason=message)]
+        return [
+            Result(
+                rule=self, passed=bool(re.fullmatch(self._url_pattern, grid_url)), target=grid_url
+            )
+        ]
 
     def __str__(self) -> str:
-        return "Check Selenium grid url format"
-
-
-class CheckServerIp(TestbedRule):
-    def is_passed(self, testbed: Testbed) -> List[Result]:
-        server_ip = testbed.servers.server_alias.address
-        has_passed = bool(re.fullmatch(self.ip_pattern, server_ip))
-        message = (
-            "Passed"
-            if has_passed
-            else f'Server IP address "{server_ip}" does not conform to IP pattern "{self.ip_pattern}"'
-        )
-        return [Result(rule=self.__str__(), run_status=has_passed, reason=message)]
-
-    def __str__(self) -> str:
-        return "Check server ip format"
+        return f"Selenium Grid URL matching '{self._url_pattern}' pattern"
 
 
 class TestbedRules:
     def __init__(
         self,
-        rules: Sequence[TestbedRule] = (
-            CheckUserCredentials(),
-            CheckDevicesIp(),
-            CheckSeleniumGridUrl(),
-            CheckServerIp(),
-        ),
+        rules: Sequence[TestbedRule] = (DevicesConnectivity("main"), SeleniumGridUrlCorrectness()),
     ):
         self._rules = rules
 
-    def validate(self, testbed: Testbed) -> None:
-        results = [rule.is_passed(testbed) for rule in self._rules]
+    def apply(self, testbed: Testbed) -> None:
+        results = [rule.results(testbed) for rule in self._rules]
         flat_results = [result for sublist in results for result in sublist]
-        if not all([result.run_status for result in flat_results]):
-            _log.info("Testbed validations".upper().center(100))
-            for result in flat_results:
-                _log.info(f"{result.rule}: " + result.reason.rjust(100 - len(result.rule)))
+        fails = filter(lambda result: not result.passed, flat_results)
+        if fails:
+            _log.info("Testbed validations is failed. There are the following errors:")
+            for result in fails:
+                _log.info("- %s", result)
             raise AssertionError("Testbed validation rule/s failed! Please fix errors!!!")

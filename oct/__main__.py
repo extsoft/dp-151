@@ -87,7 +87,7 @@ def tests_runner(test_suite: Tuple, instance: Any) -> List:  # type: ignore
 
 
 def main(runtime: EasypyRuntime) -> None:
-    TestbedRules().validate(testbed=runtime.testbed)
+    TestbedRules().apply(testbed=runtime.testbed)
     if "passed" in tests_runner(_deployment_test, runtime.testbed):
         time.sleep(60)
         if "failed" not in tests_runner(_api_tests, runtime.testbed):
