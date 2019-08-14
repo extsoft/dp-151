@@ -1,4 +1,4 @@
-pyats==5.1.0
+pyats==19.7
 selenium==3.141.0
 requests==2.21.0
 urllib3==1.24.2
