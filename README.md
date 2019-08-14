@@ -13,12 +13,18 @@ The following directories tree outlines the most important information about pro
 ├── README.md                 <= This file which documents the project.
 ├── archive                   <= pyATS reports directory (excluded from git)
 ├── oct                       <= a root package
+│   ├── __main__.py           <= a job file to run all tests          
 │   └── tests                 <= a root package for all automated tests
 │       ├── api               <= API-related tests
 │       ├── deployment        <= deployment-related tests
 │       └── web               <= WEB-related tests
-├── suite.py                  <= a job file to run all tests
-└── requirements.txt          <= Python packages for automated tests execution
+├── tests                     <= Pytest-related tests
+├── docker-compose.yaml       <= This file running app in docker
+├── Vagrantfile               <= This file create Vagrant VM
+├── testbed.yaml              <= This file which topolgy 
+├── requirements.txt          <= Python packages for automated tests execution
+├── requirements-dev.txt      <= Python packages for quality of the code
+└── code-assessment.sh        <= This file running tools for code quality evaluation
 ``` 
 
 ## Usage of automated tests
