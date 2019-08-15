@@ -36,6 +36,46 @@ Before running any command, please install required Python's dependencies with
 pip install -r requirements.txt
 ```
 
+### System under test (SUT) installation
+#### Vagrant 
+This type of launch allows to create a vagrant virtual machine with docker
+installed for deploying the application.
+ 
+If you already have virtual machine you can skip this step.
+
+To be able to use this type of run, you need to have 
+[Vagrant](https://www.vagrantup.com/) engine release 2.2.4+ 
+and [Virtualbox](https://www.virtualbox.org/wiki/Downloads) engine release  5.2.28+. 
+
+A simple way to check Vagrant: 
+```bash
+vagrant --version
+```
+
+A simple way to check Virtualbox:
+```bash
+vboxmanage --version
+``` 
+
+First of all, you need to run:
+```bash
+vagrant up
+```
+
+Now you have a virtual machine and you can deploy the application 
+on it using the oct/deployment/deploy_app.py or run all the tests 
+with the command described in the next step
+
+If you want to shutdown vm you must run:
+```bash
+vagrant halt
+``` 
+
+If you want to delete vm you must run:
+```bash
+vagrant destroy
+```
+
 ### Execution
 If you need to run whole tests suite, please run 
 
@@ -89,37 +129,6 @@ In order to run code assessment, you need to run `./code-assessment.sh` command 
 that there is no message like **_Code assessment is failed! Please fix errors!!!_**. If you face
 the massage, please fix all violations.
 
-### Creating a virtual machine for application using Vagrant 
-To be able to use this type of run, you need to have Vagrant engine release 2.2.4+ and Virtualbox 
-engine release  5.2.28+. 
-
-A simple way to check Vagrant: 
-```bash
-vagrant --version
-```
-
-A simple way to check Virtualbox:
-```bash
-vboxmanage --version
-``` 
-
-First of all, you need to run:
-```bash
-vagrant up
-```
-
-Then you can run  `suite.py` to run all tests 
-
-
-If you want to shutdown vm you must run:
-```bash
-vagrant halt
-``` 
-
-If you want to delete vm you must run:
-```bash
-vagrant destroy
-```
 
 ### Deploy and destroy application
 If you want to deploy the application to localhost, you need to run in the terminal
