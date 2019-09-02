@@ -76,6 +76,34 @@ If you want to delete vm you must run:
 vagrant destroy
 ```
 
+#### Docker
+This type of launch allows to create a docker container with
+application on your PC.
+
+To be able to use this type of run, you need to have
+[Docker](https://www.docker.com/) engine release 18.06.1-ce
+
+A simple way to check Docker:
+```bash
+docker --version
+```
+First of all, you need to run:
+```bash
+docker-compose up -d
+```
+In this case, the application will be launched on the localhost
+(127.0.0.1)
+
+If you want to run the application on another IP you need to pass the
+parameter with IP:
+```bash
+APP_HOST="IP" docker-compose up -d
+```
+If you want to shutdown docker you must run:
+```bash
+docker-compose down
+```
+
 ### Execution
 If you need to run whole tests suite, please run 
 
@@ -128,23 +156,3 @@ We use some tools to guarantee the quality of the code.
 In order to run code assessment, you need to run `./code-assessment.sh` command and make sure
 that there is no message like **_Code assessment is failed! Please fix errors!!!_**. If you face
 the massage, please fix all violations.
-
-
-### Deploy and destroy application
-If you want to deploy the application to localhost, you need to run in the terminal
-```bash
-sudo docker-compose up
-```
-After that you can enter in the browser's search field 
-```text
-https://127.0.0.1 or https://localhost
-```
-and use the application.
-If you need to destroy application, run in the terminal
-```bash
-sudo docker-compose down
-```
-
-
-
-
